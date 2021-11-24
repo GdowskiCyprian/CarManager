@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "RepairPart")
 public class RepairPart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +18,9 @@ public class RepairPart {
     @ManyToOne
     @JsonIgnoreProperties(value = {"date", "name", "description","car"}, allowGetters = false)
     private Repair repair;
+
+    public RepairPart(String repairPartName, String repairPartDescription, int price, Repair repair) {
+    }
 
     public long getIdRepairPart() { return idRepairPart; }
 

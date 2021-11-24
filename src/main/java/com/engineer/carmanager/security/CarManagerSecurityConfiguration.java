@@ -58,5 +58,7 @@ public class CarManagerSecurityConfiguration extends WebSecurityConfigurerAdapte
                 .authenticated()
                 .and()
                 .httpBasic();
+
+
     }
 }

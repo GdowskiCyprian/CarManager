@@ -18,7 +18,7 @@ public class ControllerLogin {
     @CrossOrigin
     @GetMapping("/login/{emailAddress}")
     public String loginCommunicate(@PathVariable("emailAddress") String mailAddress){
-        if(iRepairShopService.getAllRepairShop().stream().anyMatch(RepairShop -> RepairShop.getMailAddress().equals(mailAddress))){
+        if(iRepairShopService.getAllRepairShop().stream().anyMatch(RepairShop -> RepairShop.getAuth().getMailAddress().equals(mailAddress))){
             return "REPAIR_SHOP";
         }
         else{

@@ -16,7 +16,8 @@ public class ClientServiceImpl implements iClientService{
 
     @Override
     public Client getClientById(Long id) {
-        return clientRepository.getById(id);
+        return (Client) clientRepository.getById(id);
+
     }
 
     @Override

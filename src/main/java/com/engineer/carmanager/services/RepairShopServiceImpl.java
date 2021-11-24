@@ -38,10 +38,10 @@ public class RepairShopServiceImpl implements iRepairShopService{
 
     public RepairShop getRepairShopByMailAddress(String mailAddress) {
         RepairShop repairShopTemp = repairShopRepository.findAll().stream()
-                .filter(repairShop -> repairShop.getMailAddress().equals(mailAddress))
+                .filter(repairShop -> repairShop.getAuth().getMailAddress().equals(mailAddress))
                 .findFirst()
                 .get();
-        System.out.println(repairShopTemp.getMailAddress());
+        System.out.println(repairShopTemp.getAuth().getMailAddress());
         return repairShopTemp;
     }
 }

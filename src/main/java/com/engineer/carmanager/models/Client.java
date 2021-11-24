@@ -4,27 +4,41 @@ package com.engineer.carmanager.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-
-import java.util.Set;
 import javax.persistence.*;
+import java.util.Set;
+
 @Entity
-@Table(name = "Client")
-@JsonIgnoreProperties(value = "password")
 public class Client{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idClient;
     private int phoneNumber;
-    private String mailAddress;
-    private String password;
     private String name;
-    private String Surname;
+    private String surname;
     @ManyToOne
     @JsonIgnoreProperties(value = {"phoneNumber", "password", "mailAddress","name", "nip"}, allowGetters = false)
     private RepairShop repairShop;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     @JsonIgnore
     private Set<Car> cars;
+    @OneToOne
+    private Auth auth;
+
+    public Client(int phoneNumber, String name, String surname, RepairShop repairShop, Auth auth) {
+        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.surname = surname;
+        this.repairShop = repairShop;
+        this.auth = auth;
+    }
+
+    public Auth getAuth() {
+        return auth;
+    }
+
+    public void setAuth(Auth auth) {
+        this.auth = auth;
+    }
 
     public Long getIdClient() {
         return idClient;
@@ -42,22 +56,6 @@ public class Client{
         this.phoneNumber = phoneNumber;
     }
 
-    public String getMailAddress() {
-        return mailAddress;
-    }
-
-    public void setMailAddress(String mailAddress) {
-        this.mailAddress = mailAddress;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getName() {
         return name;
     }
@@ -67,11 +65,11 @@ public class Client{
     }
 
     public String getSurname() {
-        return Surname;
+        return this.surname;
     }
 
     public void setSurname(String surname) {
-        Surname = surname;
+        this.surname = surname;
     }
 
     public RepairShop getRepairShop() {
@@ -93,13 +91,7 @@ public class Client{
     public Client() {
     }
 
-    public Client(int phoneNumber, String mailAddress, String password, String name, String surname, RepairShop repairShop) {
-        this.phoneNumber = phoneNumber;
-        this.mailAddress = mailAddress;
-        this.password = password;
-        this.name = name;
-        Surname = surname;
-        this.repairShop = repairShop;
 
-    }
+
+
 }
