@@ -1,5 +1,6 @@
 package com.engineer.carmanager.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ public class RepairPart {
     private byte[] image;
 
     @ManyToOne
-    @JsonIgnoreProperties(value = {"date", "name", "description","car"}, allowGetters = false)
+    @JsonIgnore
     private Repair repair;
 
     public RepairPart(String repairPartName, String repairPartDescription, int price, Repair repair) {

@@ -20,7 +20,7 @@ public class Repair {
     @JsonIgnoreProperties(value = {"yearOfManufacture", "manufacturer", "model","version", "displacement", "power", "mileage", "client"}, allowGetters = false)
     private Car car;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "repair")
-    @JsonIgnore
+
     private Set<RepairPart> repairParts;
 
     public long getIdRepair() {

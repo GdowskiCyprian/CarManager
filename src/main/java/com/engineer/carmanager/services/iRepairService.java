@@ -9,4 +9,5 @@ public interface iRepairService {
     public void postRepair(Repair repair);
     public List<Repair> getAllRepair();
     public void deleteRepair(Long id);
+    public List<Repair> getRepairsByRepairShop(Long id);
 }

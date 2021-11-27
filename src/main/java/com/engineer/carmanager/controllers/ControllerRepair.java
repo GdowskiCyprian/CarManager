@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/repairs")
 public class ControllerRepair {
@@ -32,5 +32,10 @@ public class ControllerRepair {
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRepair/{id}")
     public void deleteRepair(@PathVariable Long id){
         iRepairService.deleteRepair(id);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/getrepairsbycurrent/{id}")
+    public List<Repair> getRepairByCurrentRepairShop(@PathVariable("id") Long id){
+        return iRepairService.getRepairsByRepairShop(id);
     }
 }

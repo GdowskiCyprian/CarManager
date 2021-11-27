@@ -35,13 +35,11 @@ public class RepairShopServiceImpl implements iRepairShopService{
     public void deleteRepairShop(Long id) {
         repairShopRepository.deleteById(id);
     }
-
+    @Override
     public RepairShop getRepairShopByMailAddress(String mailAddress) {
-        RepairShop repairShopTemp = repairShopRepository.findAll().stream()
+        return repairShopRepository.findAll().stream()
                 .filter(repairShop -> repairShop.getAuth().getMailAddress().equals(mailAddress))
                 .findFirst()
                 .get();
-        System.out.println(repairShopTemp.getAuth().getMailAddress());
-        return repairShopTemp;
     }
 }
