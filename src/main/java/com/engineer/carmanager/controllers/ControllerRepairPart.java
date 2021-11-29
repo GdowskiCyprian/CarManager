@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/repairParts")
 public class ControllerRepairPart {
@@ -32,6 +32,7 @@ public class ControllerRepairPart {
     }
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRepairPart/{id}")
     public void deleteRepairPart(@PathVariable Long id){
+        System.out.println(id);
         iRepairPartService.deleteRepairPart(id);
     }
 }
