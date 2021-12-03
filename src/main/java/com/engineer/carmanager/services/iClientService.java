@@ -9,4 +9,5 @@ public interface iClientService {
     public void postClient(Client client);
     public List<Client> getAllClient();
     public void deleteClient(Long id);
+    public List<Client> getCurrentClients(Long id);
 }

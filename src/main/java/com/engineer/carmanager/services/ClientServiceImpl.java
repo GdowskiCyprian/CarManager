@@ -34,4 +34,11 @@ public class ClientServiceImpl implements iClientService{
     public void deleteClient(Long id) {
         clientRepository.deleteById(id);
     }
+
+    @Override
+    public List<Client> getCurrentClients(Long id) {
+        return clientRepository.findAll().stream().filter(
+                Client -> Client.getRepairShop().getIdRepairShop().equals(id)
+        ).toList();
+    }
 }

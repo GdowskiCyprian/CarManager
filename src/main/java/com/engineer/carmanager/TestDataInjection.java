@@ -56,19 +56,6 @@ public class TestDataInjection implements ApplicationListener<ContextRefreshedEv
 //        Date now = new Date(System.currentTimeMillis());
 //        Repair repair = new Repair(now, "RepairName", "RepairDescription", car);
 //        repairRepository.save(repair);
-        //dodawanie pliku do obiektu
-//        File file = new File("/Users/savadrox/OneDrive/CarManager/src/main/resources/test.jpg");
-//        byte[] picInBytes = new byte[(int) file.length()];
-//        FileInputStream fis = null;
-//        try {
-//            fis = new FileInputStream(file);
-//            fis.read(picInBytes);
-//            fis.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-//
 //        RepairPart repairPart = new RepairPart("RepairPartName", "RepairPartDescription", 19, repair);
 //        repairPartRepository.save(repairPart);
 
@@ -77,36 +64,3 @@ public class TestDataInjection implements ApplicationListener<ContextRefreshedEv
 
 
 }
-/*SQL CODE TO APPLY AFTER DATABASE RESET
-
-CREATE TABLE `carmanager`.`auth` (
-  `mail_address` VARCHAR(50) NOT NULL,
-  `password` VARCHAR(250) NOT NULL,
-  `role` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`mail_address`));
-
-
-delimiter #
-CREATE TRIGGER insertToAuthfromRepairShop
-AFTER INSERT ON repair_shop
-FOR EACH ROW
-BEGIN
-INSERT INTO auth(mail_address, password, role)
-VALUES (new.mail_address, new.password, 'REPAIR_SHOP')
-ON DUPLICATE KEY UPDATE password = new.password;
-END;
-delimiter;
-delimiter #
-CREATE TRIGGER insertToAuthfromClient
-AFTER INSERT ON client
-FOR EACH ROW
-BEGIN
-INSERT INTO auth(mail_address, password, role)
-VALUES (new.mail_address, new.password, 'CLIENT')
-ON DUPLICATE KEY UPDATE password = new.password;
-END;
-delimiter;
-
-
-
- */

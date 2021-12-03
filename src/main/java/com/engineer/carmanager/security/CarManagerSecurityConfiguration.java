@@ -53,7 +53,6 @@ public class CarManagerSecurityConfiguration extends WebSecurityConfigurerAdapte
                 .antMatchers("/api/repairshops/**").hasAuthority("REPAIR_SHOP")
                 .antMatchers("/api/clients/**").hasAnyAuthority("CLIENT","REPAIR_SHOP")
                 .antMatchers("/login/**").fullyAuthenticated()
-                .antMatchers("/api/cars/**").permitAll() //for now testing frontend
                 .anyRequest()
                 .authenticated()
                 .and()

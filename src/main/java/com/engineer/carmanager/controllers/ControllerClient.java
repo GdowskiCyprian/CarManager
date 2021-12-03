@@ -34,4 +34,9 @@ public class ControllerClient {
         iClientService.deleteClient(id);
     }
 
+    @GetMapping("/getcurrentclients/{id}")
+    public List<Client> getCurrentClients(@PathVariable("id") Long id){
+        return iClientService.getCurrentClients(id);
+    }
+
 }
