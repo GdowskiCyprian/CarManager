@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/repairs")
 public class ControllerRepair {
@@ -25,8 +26,10 @@ public class ControllerRepair {
         return iRepairService.getRepairById(id);
     }
     @RequestMapping(method = RequestMethod.POST, value = "/postRepair")
-    public void postRepair(@RequestBody Repair repair){
-        iRepairService.postRepair(repair);
+    public void postRepair(@RequestParam String name, @RequestParam String date, @RequestParam String description, @RequestParam Long idCar){
+        LocalDate date1 = LocalDate.parse(date);
+        System.out.println("aaa");
+        iRepairService.postRepair(name, date1, description, idCar);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRepair/{id}")

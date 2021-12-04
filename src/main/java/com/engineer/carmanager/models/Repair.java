@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 @Entity
@@ -12,7 +13,7 @@ public class Repair {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idRepair;
-    private Date date;
+    private LocalDate date;
     private String name;
     private String description;
 
@@ -31,11 +32,11 @@ public class Repair {
         this.idRepair = idRepair;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -74,7 +75,7 @@ public class Repair {
     public Repair() {
     }
 
-    public Repair(Date date, String name, String description, Car car) {
+    public Repair(LocalDate date, String name, String description, Car car) {
         this.date = date;
         this.name = name;
         this.description = description;

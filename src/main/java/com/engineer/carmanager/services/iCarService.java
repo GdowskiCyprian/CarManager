@@ -9,4 +9,5 @@ public interface iCarService {
     public void postCar(Car car);
     public List<Car> getAllCar();
     public void deleteCar(Long id);
+    public List<Car> getCurrentCars(Long id);
 }

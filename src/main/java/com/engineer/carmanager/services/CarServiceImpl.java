@@ -35,4 +35,11 @@ public class CarServiceImpl implements iCarService{
     public void deleteCar(Long id) {
         carRepository.deleteById(id);
     }
+
+    @Override
+    public List<Car> getCurrentCars(Long id) {
+        return carRepository.findAll().stream().filter(
+                Car -> Car.getClient().getRepairShop().getIdRepairShop().equals(id)
+        ).toList();
+    }
 }

@@ -1,6 +1,7 @@
 package com.engineer.carmanager.controllers;
 
 import com.engineer.carmanager.models.Car;
+import com.engineer.carmanager.models.Client;
 import com.engineer.carmanager.services.iCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,4 +34,9 @@ public class ControllerCar {
     public void deleteCar(@PathVariable Long id){
         iCarService.deleteCar(id);
     }
+    @GetMapping("/getcurrentcars/{id}")
+    public List<Car> getCurrentCars(@PathVariable("id") Long id){
+        return iCarService.getCurrentCars(id);
+    }
+
 }
