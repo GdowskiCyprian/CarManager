@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 import javax.sql.DataSource;
 
 @Configuration
@@ -46,8 +47,7 @@ public class CarManagerSecurityConfiguration extends WebSecurityConfigurerAdapte
     @Override
     protected void configure (HttpSecurity http) throws Exception{
         http
-                .cors()
-                .and()
+                .cors().and()
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/repairshops/**").hasAuthority("REPAIR_SHOP")
@@ -60,4 +60,5 @@ public class CarManagerSecurityConfiguration extends WebSecurityConfigurerAdapte
 
 
     }
+
 }

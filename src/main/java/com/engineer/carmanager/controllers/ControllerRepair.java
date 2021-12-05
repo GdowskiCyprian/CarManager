@@ -1,6 +1,7 @@
 package com.engineer.carmanager.controllers;
 
 import com.engineer.carmanager.models.Repair;
+import com.engineer.carmanager.models.RepairTemp;
 import com.engineer.carmanager.services.iRepairService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/repairs")
 public class ControllerRepair {
@@ -25,11 +26,16 @@ public class ControllerRepair {
     public Repair getRepairById(@PathVariable("repairID") Long id) {
         return iRepairService.getRepairById(id);
     }
+
     @RequestMapping(method = RequestMethod.POST, value = "/postRepair")
-    public void postRepair(@RequestParam String name, @RequestParam String date, @RequestParam String description, @RequestParam Long idCar){
-        LocalDate date1 = LocalDate.parse(date);
-        System.out.println("aaa");
-        iRepairService.postRepair(name, date1, description, idCar);
+    public void postRepair(
+            //@RequestParam String name, @RequestParam String date, @RequestParam String description, @RequestParam Long idCar
+            @RequestBody RepairTemp repairTemp
+    )
+    {
+        LocalDate date1 = LocalDate.parse(repairTemp.getDate());
+        iRepairService.postRepair(repairTemp.getName(), date1, repairTemp.getDescription(), repairTemp.getIdCar());
+        System.out.println(repairTemp.getIdCar());
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRepair/{id}")
