@@ -1,6 +1,5 @@
 package com.engineer.carmanager.services;
 
-import com.engineer.carmanager.models.Car;
 import com.engineer.carmanager.models.Repair;
 import com.engineer.carmanager.models.RepairPart;
 import com.engineer.carmanager.models.RepairPartTemp;
@@ -8,10 +7,6 @@ import com.engineer.carmanager.repositories.RepairPartRepository;
 import com.engineer.carmanager.repositories.RepairRepository;
 import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
 import java.util.List;
 @Service("RepairPartService")
 public class RepairPartServiceImpl implements iRepairPartService{
@@ -30,18 +25,16 @@ public class RepairPartServiceImpl implements iRepairPartService{
     }
 
     @Override
-    public void postRepairPart(RepairPartTemp repairPartTemp) throws IOException {
+    public void postRepairPart(RepairPartTemp repairPartTemp) {
         RepairPart repairPart = new RepairPart();
         repairPart.setName(repairPartTemp.getPartname());
         repairPart.setDescription(repairPartTemp.getPartdescription());
         repairPart.setPrice(repairPartTemp.getPartprice());
-        //byte [] byteArr= Files.
-        //repairPart.setImage(byteArr);
-        //Repair repair = repairRepository.findAll().stream()
-        //        .filter(Repair -> Repair.getIdRepair().equals(repairPartTemp.getIdRepair()))
-        //        .findFirst().orElse(null);
-        //repairPart.setRepair(repair);
-        //repairPartRepository.save(repairPart);
+        Repair repair = repairRepository.findAll().stream()
+                .filter(Repair -> Repair.getIdRepair().equals(repairPartTemp.getIdRepair()))
+                .findFirst().orElse(null);
+        repairPart.setRepair(repair);
+        repairPartRepository.save(repairPart);
     }
 
     @Override
