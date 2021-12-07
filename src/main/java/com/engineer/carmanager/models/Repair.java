@@ -12,7 +12,7 @@ import java.util.Set;
 public class Repair {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idRepair;
+    private Long idRepair;
     private LocalDate date;
     private String name;
     private String description;
@@ -24,11 +24,11 @@ public class Repair {
 
     private Set<RepairPart> repairParts;
 
-    public long getIdRepair() {
+    public Long getIdRepair() {
         return idRepair;
     }
 
-    public void setIdRepair(long idRepair) {
+    public void setIdRepair(Long idRepair) {
         this.idRepair = idRepair;
     }
 

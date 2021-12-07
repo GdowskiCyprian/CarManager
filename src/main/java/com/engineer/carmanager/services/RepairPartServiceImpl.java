@@ -1,17 +1,27 @@
 package com.engineer.carmanager.services;
 
+import com.engineer.carmanager.models.Car;
+import com.engineer.carmanager.models.Repair;
 import com.engineer.carmanager.models.RepairPart;
+import com.engineer.carmanager.models.RepairPartTemp;
 import com.engineer.carmanager.repositories.RepairPartRepository;
+import com.engineer.carmanager.repositories.RepairRepository;
 import org.springframework.stereotype.Service;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.List;
 @Service("RepairPartService")
 public class RepairPartServiceImpl implements iRepairPartService{
 
     private RepairPartRepository repairPartRepository;
+    private RepairRepository repairRepository;
 
-    public RepairPartServiceImpl(RepairPartRepository repairPartRepository) {
+    public RepairPartServiceImpl(RepairPartRepository repairPartRepository, RepairRepository repairRepository) {
         this.repairPartRepository = repairPartRepository;
+        this.repairRepository = repairRepository;
     }
 
     @Override
@@ -20,8 +30,18 @@ public class RepairPartServiceImpl implements iRepairPartService{
     }
 
     @Override
-    public void postRepairPart(RepairPart repairPart) {
-        repairPartRepository.save(repairPart);
+    public void postRepairPart(RepairPartTemp repairPartTemp) throws IOException {
+        RepairPart repairPart = new RepairPart();
+        repairPart.setName(repairPartTemp.getPartname());
+        repairPart.setDescription(repairPartTemp.getPartdescription());
+        repairPart.setPrice(repairPartTemp.getPartprice());
+        //byte [] byteArr= Files.
+        //repairPart.setImage(byteArr);
+        //Repair repair = repairRepository.findAll().stream()
+        //        .filter(Repair -> Repair.getIdRepair().equals(repairPartTemp.getIdRepair()))
+        //        .findFirst().orElse(null);
+        //repairPart.setRepair(repair);
+        //repairPartRepository.save(repairPart);
     }
 
     @Override
