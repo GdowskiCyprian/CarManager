@@ -52,4 +52,5 @@ public class Auth {
         this.password = password;
         this.role = role;
     }
+
 }
