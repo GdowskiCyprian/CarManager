@@ -1,5 +1,7 @@
 package com.engineer.carmanager.controllers;
 
+import com.engineer.carmanager.controllersHelpersModels.ClientTemp;
+import com.engineer.carmanager.controllersHelpersModels.RepairShopTemp;
 import com.engineer.carmanager.models.Auth;
 import com.engineer.carmanager.models.Client;
 import com.engineer.carmanager.models.RepairShop;
@@ -23,10 +25,16 @@ public class ControllerLogin {
 
         return iAuthenticationService.login(email);
     }
-    @PostMapping("/register/register")
-    public void registerCommunicate(@RequestParam String mail, @RequestParam String password, @RequestParam String role, @RequestParam Long idRepairShop){
-
-
+    @PostMapping("/register/repairshop")
+    public String registerRepairShop(@RequestBody RepairShopTemp repairShopTemp){
+        return this.iAuthenticationService.registerRepairShop(repairShopTemp.getEmail(),
+                repairShopTemp.getPassword(), repairShopTemp.getName(), repairShopTemp.getPhoneNumber(),
+                repairShopTemp.getNip());
+    }
+    @PostMapping("/register/client")
+    public String registerClient(@RequestBody ClientTemp clientTemp){
+        return this.iAuthenticationService.registerClient(clientTemp.getEmail(),clientTemp.getPassword(),
+                clientTemp.getName(),clientTemp.getSurname(), clientTemp.getPhoneNumber(), clientTemp.getIdRepairShop());
     }
 
 }

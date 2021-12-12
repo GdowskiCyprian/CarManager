@@ -54,7 +54,8 @@ public class AuthenticationServiceImpl implements iAuthenticationService{
 
     @Override
     public String registerRepairShop(String email, String password, String name, int phoneNumber, int nip) {
-        Auth auth = new Auth(email, password, "REPAIR_SHOP");
+        Auth auth = new Auth(email,passwordConfig.passwordEncoder().encode( password), "REPAIR_SHOP");
+        authRepository.save(auth);
         RepairShop repairShop = new RepairShop(phoneNumber, name, nip, auth);
         repairShopRepository.save(repairShop);
         return "Repair Shop registration successfull";
