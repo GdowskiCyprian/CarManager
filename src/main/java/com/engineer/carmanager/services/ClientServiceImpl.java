@@ -41,4 +41,11 @@ public class ClientServiceImpl implements iClientService{
                 Client -> Client.getRepairShop().getIdRepairShop().equals(id)
         ).toList();
     }
+
+    @Override
+    public Client getClientbyMail(String email) {
+        return clientRepository.findAll().stream().filter(
+                Client -> Client.getAuth().getMailAddress().equals(email)
+        ).findAny().get();
+    }
 }

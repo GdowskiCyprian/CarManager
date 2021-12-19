@@ -10,4 +10,5 @@ public interface iClientService {
     public List<Client> getAllClient();
     public void deleteClient(Long id);
     public List<Client> getCurrentClients(Long id);
+    public Client getClientbyMail(String email);
 }

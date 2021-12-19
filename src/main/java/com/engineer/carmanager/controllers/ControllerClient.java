@@ -39,4 +39,9 @@ public class ControllerClient {
         return iClientService.getCurrentClients(id);
     }
 
+    @GetMapping("/getbymail/{email}")
+    public Client getByMail(@PathVariable("email") String email){
+        return iClientService.getClientbyMail(email);
+    }
+
 }
