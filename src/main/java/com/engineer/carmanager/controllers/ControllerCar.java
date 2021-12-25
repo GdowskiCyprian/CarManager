@@ -1,5 +1,6 @@
 package com.engineer.carmanager.controllers;
 
+import com.engineer.carmanager.controllersHelpersModels.CarTemp;
 import com.engineer.carmanager.models.Car;
 import com.engineer.carmanager.models.Client;
 import com.engineer.carmanager.services.iCarService;
@@ -26,10 +27,12 @@ public class ControllerCar {
     public Car getCarById(@PathVariable("carID") Long id) {
         return iCarService.getCarById(id);
     }
+
     @RequestMapping(method = RequestMethod.POST, value = "/postCar")
-    public void postCar(@RequestBody Car car){
-        iCarService.postCar(car);
+    public void postCar(@RequestBody CarTemp carTemp){
+        iCarService.postCar(carTemp);
     }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteCar/{id}")
     public void deleteCar(@PathVariable Long id){
         iCarService.deleteCar(id);

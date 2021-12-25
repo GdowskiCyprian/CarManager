@@ -2,7 +2,7 @@ package com.engineer.carmanager.services;
 
 import com.engineer.carmanager.models.Repair;
 import com.engineer.carmanager.models.RepairPart;
-import com.engineer.carmanager.models.RepairPartTemp;
+import com.engineer.carmanager.controllersHelpersModels.RepairPartTemp;
 import com.engineer.carmanager.repositories.RepairPartRepository;
 import com.engineer.carmanager.repositories.RepairRepository;
 import org.springframework.stereotype.Service;

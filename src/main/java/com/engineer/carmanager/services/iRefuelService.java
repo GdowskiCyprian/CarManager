@@ -9,4 +9,5 @@ public interface iRefuelService {
     public void postRefuel(Refuel refuel);
     public List<Refuel> getAllRefuel();
     public void deleteRefuel(Long id);
+    public List<Refuel> getCurrentRefuels(Long id);
 }

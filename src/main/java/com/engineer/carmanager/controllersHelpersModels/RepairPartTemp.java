@@ -1,4 +1,4 @@
-package com.engineer.carmanager.models;
+package com.engineer.carmanager.controllersHelpersModels;
 
 import org.springframework.web.multipart.MultipartFile;
 

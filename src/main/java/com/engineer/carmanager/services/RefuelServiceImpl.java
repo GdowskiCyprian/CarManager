@@ -33,4 +33,11 @@ public class RefuelServiceImpl implements iRefuelService{
     public void deleteRefuel(Long id) {
         refuelRepository.deleteById(id);
     }
+
+    @Override
+    public List<Refuel> getCurrentRefuels(Long id) {
+        return refuelRepository.findAll().stream().filter(
+                Refuel -> Refuel.getFuelTank().getCar().getClient().getRepairShop().getIdRepairShop().equals(id)
+        ).toList();
+    }
 }

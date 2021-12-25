@@ -35,5 +35,9 @@ public class ControllerRefuel {
         iRefuelService.deleteRefuel(id);
     }
 
+    @GetMapping("/getcurrentrefuels/{id}")
+    public List<Refuel> getCurrentCars(@PathVariable("id") Long id){
+        return iRefuelService.getCurrentRefuels(id);
+    }
 
 }

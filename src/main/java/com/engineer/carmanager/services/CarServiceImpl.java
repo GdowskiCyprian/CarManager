@@ -1,7 +1,10 @@
 package com.engineer.carmanager.services;
 
+import com.engineer.carmanager.controllersHelpersModels.CarTemp;
 import com.engineer.carmanager.models.Car;
+import com.engineer.carmanager.models.Client;
 import com.engineer.carmanager.repositories.CarRepository;
+import com.engineer.carmanager.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +13,11 @@ import java.util.List;
 public class CarServiceImpl implements iCarService{
 
     private CarRepository carRepository;
+    private ClientRepository clientRepository;
 
-    public CarServiceImpl(CarRepository carRepository) {
+    public CarServiceImpl(CarRepository carRepository, ClientRepository clientRepository) {
         this.carRepository = carRepository;
+        this.clientRepository = clientRepository;
     }
 
     @Override
@@ -21,7 +26,19 @@ public class CarServiceImpl implements iCarService{
     }
 
     @Override
-    public void postCar(Car car) {
+    public void postCar(CarTemp carTemp) {
+        Car car = new Car();
+        Client client = clientRepository.findAll().stream().filter(
+                Client -> Client.getIdClient().equals(carTemp.getIdClient())
+        ).findFirst().get();
+        car.setClient(client);
+        car.setYearOfManufacture(carTemp.getYearOfManufacture());
+        car.setManufacturer(carTemp.getManufacturer());
+        car.setModel(carTemp.getModel());
+        car.setVersion(carTemp.getVersion());
+        car.setDisplacement(carTemp.getDisplacement());
+        car.setPower(carTemp.getPower());
+        car.setMileage(carTemp.getMileage());
         carRepository.save(car);
     }
 

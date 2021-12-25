@@ -1,6 +1,7 @@
 package com.engineer.carmanager.controllers;
 
 
+import com.engineer.carmanager.controllersHelpersModels.FuelTankTemp;
 import com.engineer.carmanager.models.FuelTank;
 import com.engineer.carmanager.services.iFuelTankService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,10 @@ public class ControllerFuelTank {
         return iFuelTankService.getFuelTankById(id);
     }
     @RequestMapping(method = RequestMethod.POST, value = "/postFuelTank")
-    public void postFuelTank(@RequestBody FuelTank fuelTank){
-        iFuelTankService.postFuelTank(fuelTank);
+    public void postFuelTank(@RequestBody FuelTankTemp fuelTankTemp){
+        iFuelTankService.postFuelTank(fuelTankTemp);
     }
+
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteFuelTank/{id}")
     public void deleteFuelTank(@PathVariable Long id){
         iFuelTankService.deleteFuelTank(id);

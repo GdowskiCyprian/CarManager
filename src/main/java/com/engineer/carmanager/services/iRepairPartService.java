@@ -1,7 +1,7 @@
 package com.engineer.carmanager.services;
 
 import com.engineer.carmanager.models.RepairPart;
-import com.engineer.carmanager.models.RepairPartTemp;
+import com.engineer.carmanager.controllersHelpersModels.RepairPartTemp;
 
 import java.io.IOException;
 import java.util.List;

@@ -2,15 +2,11 @@ package com.engineer.carmanager.controllers;
 
 
 import com.engineer.carmanager.models.RepairPart;
-import com.engineer.carmanager.models.RepairPartTemp;
-import com.engineer.carmanager.models.RepairTemp;
+import com.engineer.carmanager.controllersHelpersModels.RepairPartTemp;
 import com.engineer.carmanager.services.iRepairPartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 import java.util.List;
