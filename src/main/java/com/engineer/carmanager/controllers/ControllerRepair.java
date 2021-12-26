@@ -48,4 +48,8 @@ public class ControllerRepair {
     public List<Repair> getRepairByCurrentRepairShop(@PathVariable("id") Long id){
         return iRepairService.getRepairsByRepairShop(id);
     }
+    @RequestMapping(method = RequestMethod.GET, value = "/getrepairsbycurrentclient/{id}")
+    public List<Repair> getRepairByCurrentClient(@PathVariable("id") Long id){
+        return iRepairService.getRepairsByClient(id);
+    }
 }

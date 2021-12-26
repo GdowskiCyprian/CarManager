@@ -12,4 +12,5 @@ public interface iRepairService {
     public List<Repair> getAllRepair();
     public void deleteRepair(Long id);
     public List<Repair> getRepairsByRepairShop(Long id);
+    public List<Repair> getRepairsByClient(Long id);
 }

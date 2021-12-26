@@ -59,4 +59,11 @@ public class CarServiceImpl implements iCarService{
                 Car -> Car.getClient().getRepairShop().getIdRepairShop().equals(id)
         ).toList();
     }
+
+    @Override
+    public List<Car> getCurrentCarsByClient(Long id) {
+        return carRepository.findAll().stream().filter(
+                Car -> Car.getClient().getIdClient().equals(id)
+        ).toList();
+    }
 }

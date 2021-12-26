@@ -54,4 +54,11 @@ public class RepairServiceImpl implements iRepairService{
     public List<Repair> getRepairsByRepairShop(Long id){
         return repairRepository.findAll().stream().filter(Repair -> Repair.getCar().getClient().getRepairShop().getIdRepairShop().equals(id)).toList();
     }
+
+    @Override
+    public List<Repair> getRepairsByClient(Long id) {
+        return repairRepository.findAll().stream().filter(
+                Repair -> Repair.getCar().getClient().getIdClient().equals(id)
+        ).toList();
+    }
 }

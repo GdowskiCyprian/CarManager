@@ -11,4 +11,5 @@ public interface iCarService {
     public List<Car> getAllCar();
     public void deleteCar(Long id);
     public List<Car> getCurrentCars(Long id);
+    public List<Car> getCurrentCarsByClient(Long id);
 }

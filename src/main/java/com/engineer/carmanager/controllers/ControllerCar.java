@@ -41,5 +41,9 @@ public class ControllerCar {
     public List<Car> getCurrentCars(@PathVariable("id") Long id){
         return iCarService.getCurrentCars(id);
     }
+    @GetMapping("/getcurrentcarsbyclient/{id}")
+    public List<Car> getCurrentCarsByClient(@PathVariable("id") Long id){
+        return iCarService.getCurrentCarsByClient(id);
+    }
 
 }
