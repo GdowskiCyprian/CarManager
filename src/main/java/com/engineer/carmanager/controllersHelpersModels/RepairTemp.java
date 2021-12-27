@@ -1,4 +1,4 @@
-package com.engineer.carmanager.models;
+package com.engineer.carmanager.controllersHelpersModels;
 
 public class RepairTemp {
     private String name;

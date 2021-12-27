@@ -1,7 +1,7 @@
 package com.engineer.carmanager.controllers;
 
 import com.engineer.carmanager.models.Repair;
-import com.engineer.carmanager.models.RepairTemp;
+import com.engineer.carmanager.controllersHelpersModels.RepairTemp;
 import com.engineer.carmanager.services.iRepairService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

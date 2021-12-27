@@ -43,7 +43,7 @@ public class AuthenticationServiceImpl implements iAuthenticationService{
 
     @Override
     public String registerClient(String email, String password, String name, String surname, int phoneNumber, Long idRepairShop) {
-        Auth auth = new Auth(email, password, "CLIENT");
+        Auth auth = new Auth(email, passwordConfig.passwordEncoder().encode( password), "CLIENT");
         authRepository.save(auth);
         RepairShop repairShop = repairShopRepository.findAll().stream().filter(RepairShop -> RepairShop.getIdRepairShop().equals(idRepairShop)).findFirst().get();
         Client client = new Client(phoneNumber, name, surname, repairShop, auth);
