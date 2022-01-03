@@ -67,11 +67,14 @@ public class AuthenticationServiceImpl implements iAuthenticationService{
                 .anyMatch(RepairShop -> RepairShop.getAuth().getMailAddress().equals(email))){
             RepairShop repairShop = repairShopRepository.findAll().stream()
                     .filter(RepairShop -> RepairShop.getAuth().getMailAddress().equals(email)).findFirst().get();
-            if(repairShop.getAuth().getPassword().equals(passwordConfig.passwordEncoder().encode(oldPassword)))
+            if(
+                   // repairShop.getAuth().getPassword().equals(passwordConfig.passwordEncoder().encode(oldPassword))
+                    passwordConfig.passwordEncoder().matches(oldPassword, repairShop.getAuth().getPassword())
+            )
             {
                 repairShop.getAuth().setPassword(passwordConfig.passwordEncoder().encode(newPassword));
                 repairShopRepository.save(repairShop);
-                return "Password changed succesfully";
+                return "Password changed successfully";
             }
             else{
                 return "Please check your credentials";
@@ -81,9 +84,13 @@ public class AuthenticationServiceImpl implements iAuthenticationService{
                 .anyMatch(Client -> Client.getAuth().getMailAddress().equals(email))){
             Client client = clientRepository.findAll().stream()
                     .filter(Client -> Client.getAuth().getMailAddress().equals(email)).findFirst().get();
-            if(client.getAuth().getPassword().equals(passwordConfig.passwordEncoder().encode(oldPassword)))
+            if(
+                    //client.getAuth().getPassword().equals(passwordConfig.passwordEncoder().encode(oldPassword).toString())
+                    passwordConfig.passwordEncoder().matches(oldPassword, client.getAuth().getPassword())
+            )
             {
                 client.getAuth().setPassword(passwordConfig.passwordEncoder().encode(newPassword));
+                System.out.println(passwordConfig.passwordEncoder().encode(newPassword));
                 clientRepository.save(client);
                 return "Password changed succesfully";
             }
