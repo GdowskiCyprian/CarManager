@@ -66,4 +66,23 @@ public class CarServiceImpl implements iCarService{
                 Car -> Car.getClient().getIdClient().equals(id)
         ).toList();
     }
+
+    @Override
+    public void putCar(Long idCar, String manufacturer, String model, String version, int power, int mileage, int displacement, int yearOfManufacture, Long idClient) {
+        Client client = clientRepository.findAll().stream().filter(
+                Client -> Client.getIdClient().equals(idClient)
+        ).findFirst().get();
+        Car car = new Car();
+        car.setIdCar(idCar);
+        car.setManufacturer(manufacturer);
+        car.setModel(model);
+        car.setVersion(version);
+        car.setPower(power);
+        car.setMileage(mileage);
+        car.setDisplacement(displacement);
+        car.setYearOfManufacture(yearOfManufacture);
+        car.setClient(client);
+        carRepository.save(car);
+    }
+
 }

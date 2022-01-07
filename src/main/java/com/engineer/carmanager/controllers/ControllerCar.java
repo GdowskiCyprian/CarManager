@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/cars")
@@ -44,6 +46,20 @@ public class ControllerCar {
     @GetMapping("/getcurrentcarsbyclient/{id}")
     public List<Car> getCurrentCarsByClient(@PathVariable("id") Long id){
         return iCarService.getCurrentCarsByClient(id);
+    }
+    @PutMapping("/putcar")
+    public void putCar(@RequestBody Map<String, String> car){
+        iCarService.putCar(
+                Long.valueOf(car.get("idCar")),
+                car.get("manufacturer"),
+                car.get("model"),
+                car.get("version"),
+                Integer.parseInt(car.get("power")),
+                Integer.parseInt(car.get("mileage")),
+                Integer.parseInt(car.get("displacement")),
+                Integer.parseInt(car.get("yearOfManufacture")),
+                Long.valueOf(car.get("idClient"))
+        );
     }
 
 }

@@ -12,4 +12,6 @@ public interface iCarService {
     public void deleteCar(Long id);
     public List<Car> getCurrentCars(Long id);
     public List<Car> getCurrentCarsByClient(Long id);
+    public void putCar(Long idCar, String manufacturer, String model, String version, int power, int mileage, int displacement, int yearOfManufacture, Long idClient);
 }
+

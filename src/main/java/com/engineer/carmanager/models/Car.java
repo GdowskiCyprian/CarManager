@@ -133,4 +133,30 @@ public class Car {
         this.mileage = mileage;
         this.client = client;
     }
+
+    public Car(Long idCar, int yearOfManufacture, String manufacturer, String model, String version, int displacement, int power, int mileage) {
+        this.idCar = idCar;
+        this.yearOfManufacture = yearOfManufacture;
+        this.manufacturer = manufacturer;
+        this.model = model;
+        this.version = version;
+        this.displacement = displacement;
+        this.power = power;
+        this.mileage = mileage;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "idCar=" + idCar +
+                ", yearOfManufacture=" + yearOfManufacture +
+                ", manufacturer='" + manufacturer + '\'' +
+                ", model='" + model + '\'' +
+                ", version='" + version + '\'' +
+                ", displacement=" + displacement +
+                ", power=" + power +
+                ", mileage=" + mileage +
+                ", client=" + client +
+                '}';
+    }
 }
