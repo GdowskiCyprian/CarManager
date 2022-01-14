@@ -1,14 +1,6 @@
 package com.engineer.carmanager.services;
 
-import com.engineer.carmanager.models.RepairPart;
-import com.engineer.carmanager.controllersHelpersModels.RepairPartTemp;
-
-import java.io.IOException;
-import java.util.List;
-
 public interface iRepairPartService {
-    public RepairPart getRepairPartById(Long id);
-    public void postRepairPart(RepairPartTemp repairPartTemp) throws IOException;
-    public List<RepairPart> getAllRepairPart();
-    public void deleteRepairPart(Long id);
+     void postRepairPart(String partname, String partdescription, Double price, Long idRepair);
+     void deleteRepairPart(Long id);
 }

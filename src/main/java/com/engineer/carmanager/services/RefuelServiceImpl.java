@@ -1,9 +1,8 @@
 package com.engineer.carmanager.services;
 
-import com.engineer.carmanager.controllersHelpersModels.RefuelTemp;
 import com.engineer.carmanager.models.FuelTank;
 import com.engineer.carmanager.models.Refuel;
-import com.engineer.carmanager.repositories.CarRepository;
+import com.engineer.carmanager.models.typeOfFuel;
 import com.engineer.carmanager.repositories.FuelTankRepository;
 import com.engineer.carmanager.repositories.RefuelRepository;
 import org.springframework.stereotype.Service;
@@ -22,19 +21,14 @@ public class RefuelServiceImpl implements iRefuelService{
     }
 
     @Override
-    public Refuel getRefuelById(Long id) {
-        return refuelRepository.getById(id);
-    }
-
-    @Override
-    public void postRefuel(RefuelTemp refuelTemp) {
+    public void postRefuel(Long idCar, typeOfFuel typeOfFuel, double price, double volume) {
         Refuel refuel = new Refuel();
         FuelTank fuelTank = fuelTankRepository.findAll().stream().filter(
-                FuelTank -> FuelTank.getCar().getIdCar().equals(refuelTemp.getIdCar())
+                FuelTank -> FuelTank.getCar().getIdCar().equals(idCar)
         ).findFirst().get();
-        refuel.setTypeOfFuel(refuelTemp.getTypeOfFuel());
-        refuel.setPrice(refuelTemp.getPrice());
-        refuel.setVolume(refuelTemp.getVolume());
+        refuel.setTypeOfFuel(typeOfFuel);
+        refuel.setPrice(price);
+        refuel.setVolume(volume);
         refuel.setFuelTank(fuelTank);
         if(refuel.getTypeOfFuel().equals(fuelTank.getTypeOfFuel())){
             refuelRepository.save(refuel);
@@ -43,11 +37,6 @@ public class RefuelServiceImpl implements iRefuelService{
             System.out.println("wrong fuel");
         }
 
-    }
-
-    @Override
-    public List<Refuel> getAllRefuel() {
-        return refuelRepository.findAll();
     }
 
     @Override

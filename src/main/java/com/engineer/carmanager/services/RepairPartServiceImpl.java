@@ -2,12 +2,10 @@ package com.engineer.carmanager.services;
 
 import com.engineer.carmanager.models.Repair;
 import com.engineer.carmanager.models.RepairPart;
-import com.engineer.carmanager.controllersHelpersModels.RepairPartTemp;
 import com.engineer.carmanager.repositories.RepairPartRepository;
 import com.engineer.carmanager.repositories.RepairRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 @Service("RepairPartService")
 public class RepairPartServiceImpl implements iRepairPartService{
 
@@ -20,26 +18,16 @@ public class RepairPartServiceImpl implements iRepairPartService{
     }
 
     @Override
-    public RepairPart getRepairPartById(Long id) {
-        return repairPartRepository.getById(id);
-    }
-
-    @Override
-    public void postRepairPart(RepairPartTemp repairPartTemp) {
+    public void postRepairPart(String partname, String partdescription, Double price, Long idRepair) {
         RepairPart repairPart = new RepairPart();
-        repairPart.setName(repairPartTemp.getPartname());
-        repairPart.setDescription(repairPartTemp.getPartdescription());
-        repairPart.setPrice(repairPartTemp.getPartprice());
+        repairPart.setName(partname);
+        repairPart.setDescription(partdescription);
+        repairPart.setPrice(price);
         Repair repair = repairRepository.findAll().stream()
-                .filter(Repair -> Repair.getIdRepair().equals(repairPartTemp.getIdRepair()))
+                .filter(Repair -> Repair.getIdRepair().equals(idRepair))
                 .findFirst().orElse(null);
         repairPart.setRepair(repair);
         repairPartRepository.save(repairPart);
-    }
-
-    @Override
-    public List<RepairPart> getAllRepairPart() {
-        return repairPartRepository.findAll();
     }
 
     @Override

@@ -2,15 +2,11 @@ package com.engineer.carmanager.services;
 
 import com.engineer.carmanager.models.Car;
 import com.engineer.carmanager.models.Repair;
-import com.engineer.carmanager.models.RepairShop;
 import com.engineer.carmanager.repositories.CarRepository;
 import com.engineer.carmanager.repositories.RepairRepository;
-import com.engineer.carmanager.repositories.RepairShopRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 @Service("RepairService")
 public class RepairServiceImpl implements iRepairService{
@@ -21,11 +17,6 @@ public class RepairServiceImpl implements iRepairService{
     public RepairServiceImpl(RepairRepository repairRepository, CarRepository carRepository) {
         this.repairRepository = repairRepository;
         this.carRepository = carRepository;
-    }
-
-    @Override
-    public Repair getRepairById(Long id) {
-        return repairRepository.getById(id);
     }
 
     @Override
@@ -40,11 +31,6 @@ public class RepairServiceImpl implements iRepairService{
         repair.setCar(car);
         repairRepository.save(repair);
         return "Added new repair of name: " + name;
-    }
-
-    @Override
-    public List<Repair> getAllRepair() {
-        return repairRepository.findAll();
     }
 
     @Override

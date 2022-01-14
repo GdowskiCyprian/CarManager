@@ -1,6 +1,5 @@
 package com.engineer.carmanager.services;
 
-import com.engineer.carmanager.controllersHelpersModels.CarTemp;
 import com.engineer.carmanager.models.Car;
 import com.engineer.carmanager.models.Client;
 import com.engineer.carmanager.repositories.CarRepository;
@@ -21,43 +20,25 @@ public class CarServiceImpl implements iCarService{
     }
 
     @Override
-    public Car getCarById(Long id) {
-        return carRepository.getById(id);
-    }
-
-    @Override
-    public void postCar(CarTemp carTemp) {
+    public void postCar(Long idClient, int yearOfManufacture, String manufacturer, String model, String version, int displacement, int power, int mileage) {
         Car car = new Car();
         Client client = clientRepository.findAll().stream().filter(
-                Client -> Client.getIdClient().equals(carTemp.getIdClient())
+                Client -> Client.getIdClient().equals(idClient)
         ).findFirst().get();
         car.setClient(client);
-        car.setYearOfManufacture(carTemp.getYearOfManufacture());
-        car.setManufacturer(carTemp.getManufacturer());
-        car.setModel(carTemp.getModel());
-        car.setVersion(carTemp.getVersion());
-        car.setDisplacement(carTemp.getDisplacement());
-        car.setPower(carTemp.getPower());
-        car.setMileage(carTemp.getMileage());
+        car.setYearOfManufacture(yearOfManufacture);
+        car.setManufacturer(manufacturer);
+        car.setModel(model);
+        car.setVersion(version);
+        car.setDisplacement(displacement);
+        car.setPower(power);
+        car.setMileage(mileage);
         carRepository.save(car);
-    }
-
-    @Override
-    public List<Car> getAllCar() {
-
-        return carRepository.findAll();
     }
 
     @Override
     public void deleteCar(Long id) {
         carRepository.deleteById(id);
-    }
-
-    @Override
-    public List<Car> getCurrentCars(Long id) {
-        return carRepository.findAll().stream().filter(
-                Car -> Car.getClient().getRepairShop().getIdRepairShop().equals(id)
-        ).toList();
     }
 
     @Override

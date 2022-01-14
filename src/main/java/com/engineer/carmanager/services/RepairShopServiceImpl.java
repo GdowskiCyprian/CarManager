@@ -17,24 +17,10 @@ public class RepairShopServiceImpl implements iRepairShopService{
     }
 
     @Override
-    public RepairShop getRepairShopById(Long id) {
-        return repairShopRepository.findById(id).get();
-    }
-
-    @Override
-    public void postRepairShop(RepairShop repairShop) {
-        repairShopRepository.save(repairShop);
-    }
-
-    @Override
     public List<RepairShop> getAllRepairShop() {
         return repairShopRepository.findAll();
     }
 
-    @Override
-    public void deleteRepairShop(Long id) {
-        repairShopRepository.deleteById(id);
-    }
     @Override
     public RepairShop getRepairShopByMailAddress(String mailAddress) {
         return repairShopRepository.findAll().stream()

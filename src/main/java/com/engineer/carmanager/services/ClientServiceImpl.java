@@ -15,27 +15,6 @@ public class ClientServiceImpl implements iClientService{
     }
 
     @Override
-    public Client getClientById(Long id) {
-        return (Client) clientRepository.getById(id);
-
-    }
-
-    @Override
-    public void postClient(Client client) {
-        clientRepository.save(client);
-    }
-
-    @Override
-    public List<Client> getAllClient() {
-        return clientRepository.findAll();
-    }
-
-    @Override
-    public void deleteClient(Long id) {
-        clientRepository.deleteById(id);
-    }
-
-    @Override
     public List<Client> getCurrentClients(Long id) {
         return clientRepository.findAll().stream().filter(
                 Client -> Client.getRepairShop().getIdRepairShop().equals(id)

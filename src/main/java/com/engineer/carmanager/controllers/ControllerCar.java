@@ -1,8 +1,5 @@
 package com.engineer.carmanager.controllers;
-
-import com.engineer.carmanager.controllersHelpersModels.CarTemp;
 import com.engineer.carmanager.models.Car;
-import com.engineer.carmanager.models.Client;
 import com.engineer.carmanager.services.iCarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,8 +18,17 @@ public class ControllerCar {
     iCarService iCarService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/postCar") //used
-    public void postCar(@RequestBody CarTemp carTemp){
-        iCarService.postCar(carTemp);
+    public void postCar(@RequestBody Map<String, String> carMap){
+        iCarService.postCar(
+                Long.valueOf(carMap.get("idClient")),
+                Integer.parseInt(carMap.get("yearOfManufacture")),
+                carMap.get("manufacturer"),
+                carMap.get("model"),
+                carMap.get("version"),
+                Integer.parseInt(carMap.get("displacement")),
+                Integer.parseInt(carMap.get("power")),
+                Integer.parseInt(carMap.get("mileage"))
+        );
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteCar/{id}") //used

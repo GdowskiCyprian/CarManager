@@ -1,7 +1,6 @@
 package com.engineer.carmanager.controllers;
 
 import com.engineer.carmanager.models.Repair;
-import com.engineer.carmanager.controllersHelpersModels.RepairTemp;
 import com.engineer.carmanager.services.iRepairService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/repairs")
@@ -18,10 +19,14 @@ public class ControllerRepair {
     iRepairService iRepairService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/postRepair") //used
-    public String postRepair(@RequestBody RepairTemp repairTemp)
+    public String postRepair(@RequestBody Map<String, String> repairMap)
     {
-        LocalDate date1 = LocalDate.parse(repairTemp.getDate());
-        return iRepairService.postRepair(repairTemp.getName(), date1, repairTemp.getDescription(), repairTemp.getIdCar());
+        return iRepairService.postRepair(
+                repairMap.get("name"),
+                LocalDate.parse(repairMap.get("date")),
+                repairMap.get("description"),
+                Long.valueOf(repairMap.get("idCar"))
+        );
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRepair/{id}") //used

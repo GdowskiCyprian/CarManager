@@ -1,14 +1,12 @@
 package com.engineer.carmanager.services;
 
-import com.engineer.carmanager.controllersHelpersModels.RefuelTemp;
 import com.engineer.carmanager.models.Refuel;
+import com.engineer.carmanager.models.typeOfFuel;
 
 import java.util.List;
 
 public interface iRefuelService {
-    public Refuel getRefuelById(Long id);
-    public void postRefuel(RefuelTemp refuel);
-    public List<Refuel> getAllRefuel();
-    public void deleteRefuel(Long id);
-    public List<Refuel> getCurrentRefuels(Long id);
+     void postRefuel(Long idCar, typeOfFuel typeOfFuel, double price, double volume);
+     void deleteRefuel(Long id);
+     List<Refuel> getCurrentRefuels(Long id);
 }
