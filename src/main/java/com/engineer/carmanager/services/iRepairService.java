@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface iRepairService {
     public Repair getRepairById(Long id);
-    public void postRepair(String name,LocalDate date,String description,Long idCar);
+    public String postRepair(String name,LocalDate date,String description,Long idCar);
     public List<Repair> getAllRepair();
     public void deleteRepair(Long id);
     public List<Repair> getRepairsByRepairShop(Long id);

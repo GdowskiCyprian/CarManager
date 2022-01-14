@@ -17,39 +17,24 @@ public class ControllerRepair {
     @Qualifier("RepairService")
     iRepairService iRepairService;
 
-    @GetMapping(value = "/repairAll")
-    public List<Repair> getRepairs() {
-        return iRepairService.getAllRepair();
-    }
-
-    @GetMapping(path = "/{repairID}")
-    public Repair getRepairById(@PathVariable("repairID") Long id) {
-        return iRepairService.getRepairById(id);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/postRepair")
-    public void postRepair(
-            //@RequestParam String name, @RequestParam String date, @RequestParam String description, @RequestParam Long idCar
-            @RequestBody RepairTemp repairTemp
-    )
+    @RequestMapping(method = RequestMethod.POST, value = "/postRepair") //used
+    public String postRepair(@RequestBody RepairTemp repairTemp)
     {
-
         LocalDate date1 = LocalDate.parse(repairTemp.getDate());
-        iRepairService.postRepair(repairTemp.getName(), date1, repairTemp.getDescription(), repairTemp.getIdCar());
-        System.out.println(repairTemp.getIdCar());
+        return iRepairService.postRepair(repairTemp.getName(), date1, repairTemp.getDescription(), repairTemp.getIdCar());
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRepair/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRepair/{id}") //used
     public void deleteRepair(@PathVariable Long id){
         System.out.println(id);
         iRepairService.deleteRepair(id);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/getrepairsbycurrent/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/getrepairsbycurrent/{id}") //used
     public List<Repair> getRepairByCurrentRepairShop(@PathVariable("id") Long id){
         return iRepairService.getRepairsByRepairShop(id);
     }
-    @RequestMapping(method = RequestMethod.GET, value = "/getrepairsbycurrentclient/{id}")
+    @RequestMapping(method = RequestMethod.GET, value = "/getrepairsbycurrentclient/{id}") //used
     public List<Repair> getRepairByCurrentClient(@PathVariable("id") Long id){
         return iRepairService.getRepairsByClient(id);
     }

@@ -17,22 +17,9 @@ public class ControllerFuelTank {
     @Qualifier("FuelTankService")
     iFuelTankService iFuelTankService;
 
-    @GetMapping(value = "/fuelTankAll")
-    public List<FuelTank> getFuelTanks() {
-        return iFuelTankService.getAllFuelTank();
-    }
-
-    @GetMapping(path = "/{fuelTankID}")
-    public FuelTank getFuelTankByID(@PathVariable("fuelTankID") Long id) {
-        return iFuelTankService.getFuelTankById(id);
-    }
-    @RequestMapping(method = RequestMethod.POST, value = "/postFuelTank")
+    @RequestMapping(method = RequestMethod.POST, value = "/postFuelTank") //used
     public void postFuelTank(@RequestBody FuelTankTemp fuelTankTemp){
         iFuelTankService.postFuelTank(fuelTankTemp);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteFuelTank/{id}")
-    public void deleteFuelTank(@PathVariable Long id){
-        iFuelTankService.deleteFuelTank(id);
-    }
 }

@@ -20,34 +20,21 @@ public class ControllerCar {
     @Qualifier("CarService")
     iCarService iCarService;
 
-    @GetMapping(value = "/carAll")
-    public List<Car> getCars() {
-        return iCarService.getAllCar();
-    }
-
-    @GetMapping(path = "/{carID}")
-    public Car getCarById(@PathVariable("carID") Long id) {
-        return iCarService.getCarById(id);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/postCar")
+    @RequestMapping(method = RequestMethod.POST, value = "/postCar") //used
     public void postCar(@RequestBody CarTemp carTemp){
         iCarService.postCar(carTemp);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteCar/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteCar/{id}") //used
     public void deleteCar(@PathVariable Long id){
         iCarService.deleteCar(id);
     }
-    @GetMapping("/getcurrentcars/{id}")
-    public List<Car> getCurrentCars(@PathVariable("id") Long id){
-        return iCarService.getCurrentCars(id);
-    }
-    @GetMapping("/getcurrentcarsbyclient/{id}")
+
+    @GetMapping("/getcurrentcarsbyclient/{id}") //used
     public List<Car> getCurrentCarsByClient(@PathVariable("id") Long id){
         return iCarService.getCurrentCarsByClient(id);
     }
-    @PutMapping("/putcar")
+    @PutMapping("/putcar") //used
     public void putCar(@RequestBody Map<String, String> car){
         iCarService.putCar(
                 Long.valueOf(car.get("idCar")),

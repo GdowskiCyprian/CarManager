@@ -19,20 +19,11 @@ public class ControllerRepairPart {
     @Qualifier("RepairPartService")
     iRepairPartService iRepairPartService;
 
-    @GetMapping(value = "/repairPartAll")
-    public List<RepairPart> getRepairParts() {
-        return iRepairPartService.getAllRepairPart();
-    }
-
-    @GetMapping(path = "/{repairPartID}")
-    public RepairPart getRepairPartById(@PathVariable("repairPartID") Long id) {
-        return iRepairPartService.getRepairPartById(id);
-    }
-    @RequestMapping(method = RequestMethod.POST, value = "/postRepairPart")
+    @RequestMapping(method = RequestMethod.POST, value = "/postRepairPart") //used
     public void postRepairPart(@RequestBody RepairPartTemp repairPartTemp) throws IOException {
         iRepairPartService.postRepairPart(repairPartTemp);
     }
-    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRepairPart/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRepairPart/{id}") //used
     public void deleteRepairPart(@PathVariable Long id){
         iRepairPartService.deleteRepairPart(id);
     }

@@ -26,31 +26,31 @@ public class ControllerLogin {
     @Autowired
     @Qualifier("AuthenticationService")
     private iAuthenticationService iAuthenticationService;
-    @GetMapping("/login/{emailAddress}")
+    @GetMapping("/login/{emailAddress}") //used
     public String loginCommunicate(@PathVariable("emailAddress") String email){
 
         return iAuthenticationService.login(email);
     }
-    @PostMapping("/register/repairshop")
+    @PostMapping("/register/repairshop") //used
     public String registerRepairShop(@RequestBody RepairShopTemp repairShopTemp){
         return this.iAuthenticationService.registerRepairShop(repairShopTemp.getEmail(),
                 repairShopTemp.getPassword(), repairShopTemp.getName(), repairShopTemp.getPhoneNumber(),
                 repairShopTemp.getNip());
     }
-    @PostMapping("/register/client")
+    @PostMapping("/register/client") //used
     public String registerClient(@RequestBody ClientTemp clientTemp){
         return this.iAuthenticationService.registerClient(clientTemp.getEmail(),clientTemp.getPassword(),
                 clientTemp.getName(),clientTemp.getSurname(), clientTemp.getPhoneNumber(), clientTemp.getIdRepairShop());
     }
 
-    @PostMapping("/changepassword")
+    @PostMapping("/changepassword") //used
     public String changePasswordClient(@RequestBody Map<String, String> body){
         System.out.println(body.get("email") + " " + body.get("oldPassword") + " " + body.get("newPassword"));
         return iAuthenticationService.changePassword(body.get("email"), body.get("oldPassword"), body.get("newPassword"));
     }
-    @PostMapping("file-upload")
-    public String getFile(@RequestBody MultipartFile file) throws IOException {
-        System.out.println(file.getName());
-        return "controller method invoked";
-    }
+//    @PostMapping("file-upload")
+//    public String getFile(@RequestBody MultipartFile file) throws IOException {
+//        System.out.println(file.getName());
+//        return "controller method invoked";
+//    }
 }

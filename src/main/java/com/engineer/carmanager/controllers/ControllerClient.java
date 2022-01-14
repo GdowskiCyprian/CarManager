@@ -16,30 +16,12 @@ public class ControllerClient {
     @Qualifier("ClientService")
     iClientService iClientService;
 
-    @GetMapping(value = "/clientAll")
-    public List<Client> getClients() {
-        return iClientService.getAllClient();
-    }
-
-    @GetMapping(path = "/{clientID}")
-    public Client getClientById(@PathVariable("clientID") Long id) {
-        return iClientService.getClientById(id);
-    }
-    @RequestMapping(method = RequestMethod.POST, value = "/postClient")
-    public void postClient(@RequestBody Client client){
-        iClientService.postClient(client);
-    }
-    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteClient/{id}")
-    public void deleteClient(@PathVariable Long id){
-        iClientService.deleteClient(id);
-    }
-
-    @GetMapping("/getcurrentclients/{id}")
+    @GetMapping("/getcurrentclients/{id}") //used
     public List<Client> getCurrentClients(@PathVariable("id") Long id){
         return iClientService.getCurrentClients(id);
     }
 
-    @GetMapping("/getbymail/{email}")
+    @GetMapping("/getbymail/{email}") //used
     public Client getByMail(@PathVariable("email") String email){
         return iClientService.getClientbyMail(email);
     }

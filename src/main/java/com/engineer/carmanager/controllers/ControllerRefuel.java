@@ -16,27 +16,17 @@ public class ControllerRefuel {
     @Qualifier("RefuelService")
     iRefuelService iRefuelService;
 
-    @GetMapping(value = "/refuelAll")
-    public List<Refuel> getRefuels() {
-        return iRefuelService.getAllRefuel();
-    }
-
-    @GetMapping(path = "/{refuelID}")
-    public Refuel getRefuelById(@PathVariable("refuelID") Long id) {
-        return iRefuelService.getRefuelById(id);
-    }
-
-    @RequestMapping(method = RequestMethod.POST, value = "/postRefuel")
+    @RequestMapping(method = RequestMethod.POST, value = "/postRefuel")  //used
     public void postRefuel(@RequestBody RefuelTemp refuelTemp){
         iRefuelService.postRefuel(refuelTemp);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRefuel/{id}")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRefuel/{id}") //used
     public void deleteRefuel(@PathVariable Long id){
         iRefuelService.deleteRefuel(id);
     }
 
-    @GetMapping("/getcurrentrefuels/{id}")
+    @GetMapping("/getcurrentrefuels/{id}") //used
     public List<Refuel> getCurrentCars(@PathVariable("id") Long id){
         return iRefuelService.getCurrentRefuels(id);
     }

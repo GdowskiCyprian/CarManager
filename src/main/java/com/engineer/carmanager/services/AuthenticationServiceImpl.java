@@ -37,28 +37,39 @@ public class AuthenticationServiceImpl implements iAuthenticationService{
             return "CLIENT";
         }
         else{
-            return "error";
+            return "Wrong email or Password";
         }
     }
 
     @Override
     public String registerClient(String email, String password, String name, String surname, int phoneNumber, Long idRepairShop) {
-        Auth auth = new Auth(email, passwordConfig.passwordEncoder().encode( password), "CLIENT");
-        authRepository.save(auth);
-        RepairShop repairShop = repairShopRepository.findAll().stream().filter(RepairShop -> RepairShop.getIdRepairShop().equals(idRepairShop)).findFirst().get();
-        Client client = new Client(phoneNumber, name, surname, repairShop, auth);
-        clientRepository.save(client);
-        return "Client registration successfull";
+        if(authRepository.findAll().stream().noneMatch(Auth -> Auth.getMailAddress().equals(email))){
+            Auth auth = new Auth(email, passwordConfig.passwordEncoder().encode( password), "CLIENT");
+            authRepository.save(auth);
+            RepairShop repairShop = repairShopRepository.findAll().stream().filter(RepairShop -> RepairShop.getIdRepairShop().equals(idRepairShop)).findFirst().get();
+            Client client = new Client(phoneNumber, name, surname, repairShop, auth);
+            clientRepository.save(client);
+            return "Client registration successfull";
+        }
+        else{
+            return "Email is already taken";
+        }
+
 
     }
 
     @Override
     public String registerRepairShop(String email, String password, String name, int phoneNumber, int nip) {
-        Auth auth = new Auth(email,passwordConfig.passwordEncoder().encode( password), "REPAIR_SHOP");
-        authRepository.save(auth);
-        RepairShop repairShop = new RepairShop(phoneNumber, name, nip, auth);
-        repairShopRepository.save(repairShop);
-        return "Repair Shop registration successfull";
+        if(authRepository.findAll().stream().noneMatch(Auth -> Auth.getMailAddress().equals(email))){
+            Auth auth = new Auth(email,passwordConfig.passwordEncoder().encode( password), "REPAIR_SHOP");
+            authRepository.save(auth);
+            RepairShop repairShop = new RepairShop(phoneNumber, name, nip, auth);
+            repairShopRepository.save(repairShop);
+            return "Repair Shop registration successfull";
+        }
+        else{
+            return "Email is already taken";
+        }
     }
 
     @Override
@@ -68,7 +79,7 @@ public class AuthenticationServiceImpl implements iAuthenticationService{
             RepairShop repairShop = repairShopRepository.findAll().stream()
                     .filter(RepairShop -> RepairShop.getAuth().getMailAddress().equals(email)).findFirst().get();
             if(
-                   // repairShop.getAuth().getPassword().equals(passwordConfig.passwordEncoder().encode(oldPassword))
+
                     passwordConfig.passwordEncoder().matches(oldPassword, repairShop.getAuth().getPassword())
             )
             {
@@ -85,7 +96,7 @@ public class AuthenticationServiceImpl implements iAuthenticationService{
             Client client = clientRepository.findAll().stream()
                     .filter(Client -> Client.getAuth().getMailAddress().equals(email)).findFirst().get();
             if(
-                    //client.getAuth().getPassword().equals(passwordConfig.passwordEncoder().encode(oldPassword).toString())
+
                     passwordConfig.passwordEncoder().matches(oldPassword, client.getAuth().getPassword())
             )
             {

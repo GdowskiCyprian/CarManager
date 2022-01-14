@@ -29,7 +29,7 @@ public class RepairServiceImpl implements iRepairService{
     }
 
     @Override
-    public void postRepair(String name,LocalDate date,String description,Long idCar) {
+    public String postRepair(String name,LocalDate date,String description,Long idCar) {
         Car car = carRepository.findAll().stream()
                 .filter(Car -> Car.getIdCar().equals(idCar))
                 .findFirst().orElse(null);
@@ -39,6 +39,7 @@ public class RepairServiceImpl implements iRepairService{
         repair.setDescription(description);
         repair.setCar(car);
         repairRepository.save(repair);
+        return "Added new repair of name: " + name;
     }
 
     @Override
