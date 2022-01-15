@@ -11,8 +11,8 @@ import java.util.List;
 @Service("CarService")
 public class CarServiceImpl implements iCarService{
 
-    private CarRepository carRepository;
-    private ClientRepository clientRepository;
+    private final CarRepository carRepository;
+    private final ClientRepository clientRepository;
 
     public CarServiceImpl(CarRepository carRepository, ClientRepository clientRepository) {
         this.carRepository = carRepository;
@@ -20,25 +20,40 @@ public class CarServiceImpl implements iCarService{
     }
 
     @Override
-    public void postCar(Long idClient, int yearOfManufacture, String manufacturer, String model, String version, int displacement, int power, int mileage) {
-        Car car = new Car();
-        Client client = clientRepository.findAll().stream().filter(
-                Client -> Client.getIdClient().equals(idClient)
-        ).findFirst().get();
-        car.setClient(client);
-        car.setYearOfManufacture(yearOfManufacture);
-        car.setManufacturer(manufacturer);
-        car.setModel(model);
-        car.setVersion(version);
-        car.setDisplacement(displacement);
-        car.setPower(power);
-        car.setMileage(mileage);
-        carRepository.save(car);
+    public String postCar(Long idClient, int yearOfManufacture, String manufacturer, String model, String version, int displacement, int power, int mileage) {
+        String returnMessage = "Car saved";
+        try{
+            Car car = new Car();
+            Client client = clientRepository.findAll().stream().filter(
+                    Client -> Client.getIdClient().equals(idClient)
+            ).findFirst().get();
+            car.setClient(client);
+            car.setYearOfManufacture(yearOfManufacture);
+            car.setManufacturer(manufacturer);
+            car.setModel(model);
+            car.setVersion(version);
+            car.setDisplacement(displacement);
+            car.setPower(power);
+            car.setMileage(mileage);
+            carRepository.save(car);
+        }
+        catch(Exception e){
+            returnMessage = "Car save unsuccessful";
+        }
+        return returnMessage;
     }
 
     @Override
-    public void deleteCar(Long id) {
-        carRepository.deleteById(id);
+    public String deleteCar(Long id) {
+        String returnMessage = "Car deleted";
+        try{
+            carRepository.deleteById(id);
+        }
+        catch(Exception e){
+            returnMessage = "Car delete unsuccessful";
+        }
+        return returnMessage;
+
     }
 
     @Override
@@ -49,21 +64,29 @@ public class CarServiceImpl implements iCarService{
     }
 
     @Override
-    public void putCar(Long idCar, String manufacturer, String model, String version, int power, int mileage, int displacement, int yearOfManufacture, Long idClient) {
-        Client client = clientRepository.findAll().stream().filter(
-                Client -> Client.getIdClient().equals(idClient)
-        ).findFirst().get();
-        Car car = new Car();
-        car.setIdCar(idCar);
-        car.setManufacturer(manufacturer);
-        car.setModel(model);
-        car.setVersion(version);
-        car.setPower(power);
-        car.setMileage(mileage);
-        car.setDisplacement(displacement);
-        car.setYearOfManufacture(yearOfManufacture);
-        car.setClient(client);
-        carRepository.save(car);
+    public String putCar(Long idCar, String manufacturer, String model, String version, int power, int mileage, int displacement, int yearOfManufacture, Long idClient) {
+        String returnMessage = "Car updated";
+        try {
+            Client client = clientRepository.findAll().stream().filter(
+                    Client -> Client.getIdClient().equals(idClient)
+            ).findFirst().get();
+            Car car = new Car();
+            car.setIdCar(idCar);
+            car.setManufacturer(manufacturer);
+            car.setModel(model);
+            car.setVersion(version);
+            car.setPower(power);
+            car.setMileage(mileage);
+            car.setDisplacement(displacement);
+            car.setYearOfManufacture(yearOfManufacture);
+            car.setClient(client);
+            carRepository.save(car);
+        }
+        catch(Exception e){
+            returnMessage = "Car update unsuccessful";
+        }
+        return returnMessage;
+
     }
 
 }

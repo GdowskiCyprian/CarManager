@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 @Service("RepairPartService")
 public class RepairPartServiceImpl implements iRepairPartService{
 
-    private RepairPartRepository repairPartRepository;
-    private RepairRepository repairRepository;
+    private final RepairPartRepository repairPartRepository;
+    private final RepairRepository repairRepository;
 
     public RepairPartServiceImpl(RepairPartRepository repairPartRepository, RepairRepository repairRepository) {
         this.repairPartRepository = repairPartRepository;
@@ -18,20 +18,34 @@ public class RepairPartServiceImpl implements iRepairPartService{
     }
 
     @Override
-    public void postRepairPart(String partname, String partdescription, Double price, Long idRepair) {
-        RepairPart repairPart = new RepairPart();
-        repairPart.setName(partname);
-        repairPart.setDescription(partdescription);
-        repairPart.setPrice(price);
-        Repair repair = repairRepository.findAll().stream()
-                .filter(Repair -> Repair.getIdRepair().equals(idRepair))
-                .findFirst().orElse(null);
-        repairPart.setRepair(repair);
-        repairPartRepository.save(repairPart);
+    public String postRepairPart(String partname, String partdescription, Double price, Long idRepair) {
+        String returnMessage = "Repair part saved";
+        try {
+            RepairPart repairPart = new RepairPart();
+            repairPart.setName(partname);
+            repairPart.setDescription(partdescription);
+            repairPart.setPrice(price);
+            Repair repair = repairRepository.findAll().stream()
+                    .filter(Repair -> Repair.getIdRepair().equals(idRepair))
+                    .findFirst().orElse(null);
+            repairPart.setRepair(repair);
+            repairPartRepository.save(repairPart);
+        }
+        catch (Exception e){
+            returnMessage = "Repair part save unsuccessful";
+        }
+        return returnMessage;
     }
 
     @Override
-    public void deleteRepairPart(Long id) {
-        repairPartRepository.deleteById(id);
+    public String deleteRepairPart(Long id) {
+        String returnMessage = "Repair part deleted";
+        try{
+            repairPartRepository.deleteById(id);
+        }
+        catch (Exception e){
+            returnMessage = "Repair part delete unsuccessful";
+        }
+        return returnMessage;
     }
 }

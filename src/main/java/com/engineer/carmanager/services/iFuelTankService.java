@@ -4,5 +4,5 @@ import com.engineer.carmanager.models.typeOfFuel;
 
 
 public interface iFuelTankService {
-     void postFuelTank(Long idCar, typeOfFuel typeOfFuel, Double capacity);
+     String postFuelTank(Long idCar, typeOfFuel typeOfFuel, Double capacity);
 }

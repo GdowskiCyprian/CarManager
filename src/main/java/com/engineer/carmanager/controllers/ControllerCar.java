@@ -18,8 +18,8 @@ public class ControllerCar {
     iCarService iCarService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/postCar") //used
-    public void postCar(@RequestBody Map<String, String> carMap){
-        iCarService.postCar(
+    public String postCar(@RequestBody Map<String, String> carMap){
+        return iCarService.postCar(
                 Long.valueOf(carMap.get("idClient")),
                 Integer.parseInt(carMap.get("yearOfManufacture")),
                 carMap.get("manufacturer"),
@@ -32,8 +32,8 @@ public class ControllerCar {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteCar/{id}") //used
-    public void deleteCar(@PathVariable Long id){
-        iCarService.deleteCar(id);
+    public String deleteCar(@PathVariable Long id){
+        return iCarService.deleteCar(id);
     }
 
     @GetMapping("/getcurrentcarsbyclient/{id}") //used
@@ -41,8 +41,8 @@ public class ControllerCar {
         return iCarService.getCurrentCarsByClient(id);
     }
     @PutMapping("/putcar") //used
-    public void putCar(@RequestBody Map<String, String> car){
-        iCarService.putCar(
+    public String putCar(@RequestBody Map<String, String> car){
+        return iCarService.putCar(
                 Long.valueOf(car.get("idCar")),
                 car.get("manufacturer"),
                 car.get("model"),

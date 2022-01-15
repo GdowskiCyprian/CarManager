@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 @Service("RepairShopService")
 public class RepairShopServiceImpl implements iRepairShopService{
 
-    private RepairShopRepository repairShopRepository;
+    private final RepairShopRepository repairShopRepository;
 
     public RepairShopServiceImpl(RepairShopRepository repairShopRepository) {
         this.repairShopRepository = repairShopRepository;

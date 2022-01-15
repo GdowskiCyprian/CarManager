@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service("FuelTankService")
 public class FuelTankServiceImpl implements iFuelTankService{
-    private FuelTankRepository fuelTankRepository;
-    private CarRepository carRepository;
+    private final FuelTankRepository fuelTankRepository;
+    private final CarRepository carRepository;
 
     public FuelTankServiceImpl(FuelTankRepository fuelTankRepository, CarRepository carRepository) {
         this.fuelTankRepository = fuelTankRepository;
@@ -18,14 +18,21 @@ public class FuelTankServiceImpl implements iFuelTankService{
     }
 
     @Override
-    public void postFuelTank(Long idCar, typeOfFuel typeOfFuel, Double capacity) {
-        FuelTank fuelTank = new FuelTank();
-        Car car = carRepository.findAll().stream().filter(
-                Car -> Car.getIdCar().equals(idCar)
-        ).findFirst().get();
-        fuelTank.setTypeOfFuel(typeOfFuel);
-        fuelTank.setCapacity(capacity);
-        fuelTank.setCar(car);
-        fuelTankRepository.save(fuelTank);
+    public String postFuelTank(Long idCar, typeOfFuel typeOfFuel, Double capacity) {
+        String returnMessage = "Fuel Tank saved";
+        try{
+            FuelTank fuelTank = new FuelTank();
+            Car car = carRepository.findAll().stream().filter(
+                    Car -> Car.getIdCar().equals(idCar)
+            ).findFirst().get();
+            fuelTank.setTypeOfFuel(typeOfFuel);
+            fuelTank.setCapacity(capacity);
+            fuelTank.setCar(car);
+            fuelTankRepository.save(fuelTank);
+        }
+        catch(Exception e){
+            returnMessage = "Fuel tank save unsuccessful";
+        }
+        return returnMessage;
     }
 }

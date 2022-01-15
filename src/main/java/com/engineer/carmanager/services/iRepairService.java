@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface iRepairService {
      String postRepair(String name,LocalDate date,String description,Long idCar);
-     void deleteRepair(Long id);
+     String deleteRepair(Long id);
      List<Repair> getRepairsByRepairShop(Long id);
      List<Repair> getRepairsByClient(Long id);
 }

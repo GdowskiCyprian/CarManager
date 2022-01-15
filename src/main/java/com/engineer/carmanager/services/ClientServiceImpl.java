@@ -8,7 +8,7 @@ import java.util.List;
 @Service("ClientService")
 public class ClientServiceImpl implements iClientService{
 
-    private ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
 
     public ClientServiceImpl(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;

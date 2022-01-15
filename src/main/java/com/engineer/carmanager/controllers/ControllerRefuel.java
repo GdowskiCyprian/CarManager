@@ -19,8 +19,8 @@ public class ControllerRefuel {
     iRefuelService iRefuelService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/postRefuel")  //used
-    public void postRefuel(@RequestBody Map<String, String> refuelTempMap){
-        iRefuelService.postRefuel(
+    public String postRefuel(@RequestBody Map<String, String> refuelTempMap){
+        return iRefuelService.postRefuel(
                 Long.valueOf(refuelTempMap.get("idCar")),
                 typeOfFuel.valueOf(refuelTempMap.get("typeOfFuel")),
                 Double.valueOf(refuelTempMap.get("price")),
@@ -29,8 +29,8 @@ public class ControllerRefuel {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRefuel/{id}") //used
-    public void deleteRefuel(@PathVariable Long id){
-        iRefuelService.deleteRefuel(id);
+    public String deleteRefuel(@PathVariable Long id){
+        return iRefuelService.deleteRefuel(id);
     }
 
     @GetMapping("/getcurrentrefuels/{id}") //used

@@ -17,8 +17,8 @@ public class ControllerFuelTank {
     iFuelTankService iFuelTankService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/postFuelTank") //used
-    public void postFuelTank(@RequestBody Map<String, String> fuelTankMap){
-        iFuelTankService.postFuelTank(Long.valueOf(fuelTankMap.get("idCar")), typeOfFuel.valueOf(fuelTankMap.get("typeOfFuel")), Double.valueOf(fuelTankMap.get("capacity")));
+    public String postFuelTank(@RequestBody Map<String, String> fuelTankMap){
+        return iFuelTankService.postFuelTank(Long.valueOf(fuelTankMap.get("idCar")), typeOfFuel.valueOf(fuelTankMap.get("typeOfFuel")), Double.valueOf(fuelTankMap.get("capacity")));
     }
 
 }

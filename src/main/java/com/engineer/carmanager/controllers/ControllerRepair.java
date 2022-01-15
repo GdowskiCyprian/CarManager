@@ -30,9 +30,8 @@ public class ControllerRepair {
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRepair/{id}") //used
-    public void deleteRepair(@PathVariable Long id){
-        System.out.println(id);
-        iRepairService.deleteRepair(id);
+    public String deleteRepair(@PathVariable Long id){
+        return iRepairService.deleteRepair(id);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/getrepairsbycurrent/{id}") //used

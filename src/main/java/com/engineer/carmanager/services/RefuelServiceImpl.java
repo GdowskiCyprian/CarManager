@@ -11,8 +11,8 @@ import java.util.List;
 @Service("RefuelService")
 public class RefuelServiceImpl implements iRefuelService{
 
-    private RefuelRepository refuelRepository;
-    private FuelTankRepository fuelTankRepository;
+    private final RefuelRepository refuelRepository;
+    private final FuelTankRepository fuelTankRepository;
 
     public RefuelServiceImpl(RefuelRepository refuelRepository,
                              FuelTankRepository fuelTankRepository) {
@@ -21,27 +21,42 @@ public class RefuelServiceImpl implements iRefuelService{
     }
 
     @Override
-    public void postRefuel(Long idCar, typeOfFuel typeOfFuel, double price, double volume) {
-        Refuel refuel = new Refuel();
-        FuelTank fuelTank = fuelTankRepository.findAll().stream().filter(
-                FuelTank -> FuelTank.getCar().getIdCar().equals(idCar)
-        ).findFirst().get();
-        refuel.setTypeOfFuel(typeOfFuel);
-        refuel.setPrice(price);
-        refuel.setVolume(volume);
-        refuel.setFuelTank(fuelTank);
-        if(refuel.getTypeOfFuel().equals(fuelTank.getTypeOfFuel())){
-            refuelRepository.save(refuel);
+    public String postRefuel(Long idCar, typeOfFuel typeOfFuel, double price, double volume) {
+        String returnMessage = "Refuel saved";
+        try{
+            Refuel refuel = new Refuel();
+            FuelTank fuelTank = fuelTankRepository.findAll().stream().filter(
+                    FuelTank -> FuelTank.getCar().getIdCar().equals(idCar)
+            ).findFirst().get();
+            refuel.setTypeOfFuel(typeOfFuel);
+            refuel.setPrice(price);
+            refuel.setVolume(volume);
+            refuel.setFuelTank(fuelTank);
+            if(refuel.getTypeOfFuel().equals(fuelTank.getTypeOfFuel())){
+                refuelRepository.save(refuel);
+            }
+            else{
+                returnMessage = "Wrong fuel";
+            }
         }
-        else{
-            System.out.println("wrong fuel");
+        catch (Exception e){
+            returnMessage = "Refuel save unsuccessful";
         }
+        return returnMessage;
+
 
     }
 
     @Override
-    public void deleteRefuel(Long id) {
-        refuelRepository.deleteById(id);
+    public String deleteRefuel(Long id) {
+        String returnMessage = "Refuel deleted";
+        try{
+            refuelRepository.deleteById(id);
+        }
+        catch(Exception e){
+            returnMessage = "Refuel delete unsuccessful";
+        }
+        return returnMessage;
     }
 
     @Override

@@ -11,8 +11,8 @@ import java.util.List;
 @Service("RepairService")
 public class RepairServiceImpl implements iRepairService{
 
-    private RepairRepository repairRepository;
-    private CarRepository carRepository;
+    private final RepairRepository repairRepository;
+    private final CarRepository carRepository;
 
     public RepairServiceImpl(RepairRepository repairRepository, CarRepository carRepository) {
         this.repairRepository = repairRepository;
@@ -21,21 +21,34 @@ public class RepairServiceImpl implements iRepairService{
 
     @Override
     public String postRepair(String name,LocalDate date,String description,Long idCar) {
-        Car car = carRepository.findAll().stream()
-                .filter(Car -> Car.getIdCar().equals(idCar))
-                .findFirst().orElse(null);
-        Repair repair = new Repair();
-        repair.setName(name);
-        repair.setDate(date);
-        repair.setDescription(description);
-        repair.setCar(car);
-        repairRepository.save(repair);
-        return "Added new repair of name: " + name;
+        String returnMessage = "Repair saved";
+        try{
+            Car car = carRepository.findAll().stream()
+                    .filter(Car -> Car.getIdCar().equals(idCar))
+                    .findFirst().orElse(null);
+            Repair repair = new Repair();
+            repair.setName(name);
+            repair.setDate(date);
+            repair.setDescription(description);
+            repair.setCar(car);
+            repairRepository.save(repair);
+        }
+        catch(Exception e){
+            returnMessage = "Repair save unsuccessful";
+        }
+        return returnMessage;
     }
 
     @Override
-    public void deleteRepair(Long id) {
-        repairRepository.deleteById(id);
+    public String deleteRepair(Long id) {
+        String returnMessage = "Repair deleted";
+        try{
+            repairRepository.deleteById(id);
+        }
+        catch(Exception e){
+            returnMessage = "Repair delete unsuccessful";
+        }
+        return returnMessage;
     }
 
     public List<Repair> getRepairsByRepairShop(Long id){

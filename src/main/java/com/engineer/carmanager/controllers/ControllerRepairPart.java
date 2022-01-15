@@ -17,8 +17,8 @@ public class ControllerRepairPart {
     iRepairPartService iRepairPartService;
 
     @RequestMapping(method = RequestMethod.POST, value = "/postRepairPart") //used
-    public void postRepairPart(@RequestBody Map<String, String> repairPartMap) {
-        iRepairPartService.postRepairPart(
+    public String postRepairPart(@RequestBody Map<String, String> repairPartMap) {
+        return iRepairPartService.postRepairPart(
                 repairPartMap.get("partname"),
                 repairPartMap.get("partdescription"),
                 Double.valueOf(repairPartMap.get("price")),
@@ -26,7 +26,7 @@ public class ControllerRepairPart {
         );
     }
     @RequestMapping(method = RequestMethod.DELETE, value = "/deleteRepairPart/{id}") //used
-    public void deleteRepairPart(@PathVariable Long id){
-        iRepairPartService.deleteRepairPart(id);
+    public String deleteRepairPart(@PathVariable Long id){
+        return iRepairPartService.deleteRepairPart(id);
     }
 }
