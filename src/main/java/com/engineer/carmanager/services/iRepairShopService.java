@@ -7,4 +7,5 @@ import java.util.List;
 public interface iRepairShopService {
      List<RepairShop> getAllRepairShop();
      RepairShop getRepairShopByMailAddress(String mailAddress);
+     String deleteRepairShop(Long id);
 }

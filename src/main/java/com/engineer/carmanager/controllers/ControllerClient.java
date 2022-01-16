@@ -26,4 +26,6 @@ public class ControllerClient {
         return iClientService.getClientbyMail(email);
     }
 
+    @DeleteMapping("/deleteClient/{id}") //used
+    public String deleteClient(@PathVariable("id") Long id) {return iClientService.deleteClient(id);}
 }

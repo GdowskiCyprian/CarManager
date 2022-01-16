@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.Set;
 import javax.persistence.*;
 @Entity
-@Table(name = "FuelTank")
+@Table(name = "fueltank")
 public class FuelTank {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

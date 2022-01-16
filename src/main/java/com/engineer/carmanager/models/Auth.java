@@ -3,6 +3,7 @@ package com.engineer.carmanager.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name="auth")
 public class Auth {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,4 +7,5 @@ import java.util.List;
 public interface iClientService {
      List<Client> getCurrentClients(Long id);
      Client getClientbyMail(String email);
+     String deleteClient(Long id);
 }

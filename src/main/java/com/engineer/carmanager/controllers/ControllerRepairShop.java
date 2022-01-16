@@ -25,4 +25,8 @@ public class ControllerRepairShop {
         return iRepairShopService.getRepairShopByMailAddress(mailAddress);
     }
 
+    @DeleteMapping(path="/deleteRepairShop/{id}") //used
+    public String deleteRepairShop(@PathVariable("id") Long id){
+        return iRepairShopService.deleteRepairShop(id);
+    }
 }

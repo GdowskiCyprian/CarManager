@@ -51,16 +51,11 @@ public class CarManagerSecurityConfiguration extends WebSecurityConfigurerAdapte
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/repairshops/**").permitAll()
-                //.antMatchers("/api/repairshops/**").hasAuthority("REPAIR_SHOP")
-                .antMatchers("/api/clients/**").hasAnyAuthority("CLIENT","REPAIR_SHOP")
                 .antMatchers("/login/**").fullyAuthenticated()
                 .antMatchers("/register/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .httpBasic();
-
-
     }
-
 }

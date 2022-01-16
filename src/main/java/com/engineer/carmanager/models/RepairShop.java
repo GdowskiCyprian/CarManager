@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
+@Table(name="repairshop")
 public class RepairShop{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

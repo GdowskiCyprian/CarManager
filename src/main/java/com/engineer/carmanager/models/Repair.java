@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 @Entity
-@Table(name = "Repair")
+@Table(name = "repair")
 public class Repair {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
