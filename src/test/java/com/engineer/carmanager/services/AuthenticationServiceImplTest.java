@@ -7,57 +7,64 @@ import com.engineer.carmanager.repositories.AuthRepository;
 import com.engineer.carmanager.repositories.ClientRepository;
 import com.engineer.carmanager.repositories.RepairShopRepository;
 import com.engineer.carmanager.security.PasswordConfig;
-import org.aspectj.lang.annotation.Before;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.MockitoFramework;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@DataJpaTest
-@EnableJpaAuditing
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
 class AuthenticationServiceImplTest {
-
+    @InjectMocks
     AuthenticationServiceImpl authenticationServiceImpl;
+    @Mock
+    ClientRepository clientRepository;
+    @Mock
+    RepairShopRepository repairShopRepository;
+    @Mock
+    AuthRepository authRepository;
 
     PasswordConfig passwordConfig;
 
-    @MockBean
-    AuthRepository authRepository;
-    @MockBean
-    RepairShopRepository repairShopRepository;
-    @MockBean
-    ClientRepository clientRepository;
-
-
-
-    @BeforeAll
-    public void setUp(){
+    @BeforeEach
+    void setUp() {
         MockitoAnnotations.openMocks(this);
-        passwordConfig = new PasswordConfig();
         authenticationServiceImpl = new AuthenticationServiceImpl(clientRepository, repairShopRepository, authRepository, passwordConfig);
-
     }
 
     @Test
     void login() {
-        Auth auth = new Auth("client@client.pl", passwordConfig.passwordEncoder().encode("ClientPassword"),"CLIENT" );
-        authRepository.save(auth);
+        List<RepairShop> list = new ArrayList<>();
+
+        Auth auth = new Auth();
+        auth.setAuthid(1L);
+        auth.setMailAddress("REmail");
+
         RepairShop repairShop = new RepairShop();
-        repairShopRepository.save(repairShop);
-        Client client = new Client(123456789, "name", "surname",repairShop, auth );
-        clientRepository.save(client);
-        Assertions.assertEquals("CLIENT", authenticationServiceImpl.login("client@client.pl"));
+        repairShop.setIdRepairShop(1L);
+        repairShop.setAuth(auth);
+        list.add(repairShop);
+
+        List<Client> clientList = new ArrayList<>();
+
+        Auth auth1 = new Auth();
+        auth1.setAuthid(2L);
+        auth1.setMailAddress("CEmail");
+
+        Client client = new Client();
+        client.setIdClient(1L);
+        client.setAuth(auth1);
+        clientList.add(client);
+        when(repairShopRepository.findAll()).thenReturn(list);
+        when(clientRepository.findAll()).thenReturn(clientList);
+        assertEquals("CLIENT", authenticationServiceImpl.login("CEmail"));
+        assertEquals("REPAIR_SHOP", authenticationServiceImpl.login("REmail"));
+        assertEquals("Wrong email or Password", authenticationServiceImpl.login("something"));
     }
 
     @Test

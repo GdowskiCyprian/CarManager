@@ -27,8 +27,8 @@ public class AuthenticationServiceImpl implements iAuthenticationService{
     @Override
     public String login(String email) {
         if(repairShopRepository.findAll().stream()
-                .anyMatch(RepairShop -> RepairShop.getAuth().getMailAddress().equals(email))){
-
+                .anyMatch(RepairShop -> RepairShop.getAuth().getMailAddress().equals(email)))
+        {
             return "REPAIR_SHOP";
         }
         else if(clientRepository.findAll().stream()
