@@ -67,6 +67,7 @@ class RepairShopServiceImplTest {
         RepairShop repairShop = new RepairShop();
         repairShop.setIdRepairShop(1L);
         repairShop.setAuth(auth);
+
         when(repairShopRepository.getById(repairShop.getIdRepairShop())).thenReturn(repairShop);
         assertEquals("Repair shop deleted", repairShopServiceImpl.deleteRepairShop(1L));
         assertEquals("Repair shop delete unsuccessful", repairShopServiceImpl.deleteRepairShop(2L));

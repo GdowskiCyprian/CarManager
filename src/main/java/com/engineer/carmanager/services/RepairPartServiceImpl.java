@@ -27,7 +27,7 @@ public class RepairPartServiceImpl implements iRepairPartService{
             repairPart.setPrice(price);
             Repair repair = repairRepository.findAll().stream()
                     .filter(Repair -> Repair.getIdRepair().equals(idRepair))
-                    .findFirst().orElse(null);
+                    .findFirst().get();
             repairPart.setRepair(repair);
             repairPartRepository.save(repairPart);
         }

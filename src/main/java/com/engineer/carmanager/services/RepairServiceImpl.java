@@ -23,9 +23,7 @@ public class RepairServiceImpl implements iRepairService{
     public String postRepair(String name,LocalDate date,String description,Long idCar) {
         String returnMessage = "Repair saved";
         try{
-            Car car = carRepository.findAll().stream()
-                    .filter(Car -> Car.getIdCar().equals(idCar))
-                    .findFirst().orElse(null);
+            Car car = carRepository.getById(idCar);
             Repair repair = new Repair();
             repair.setName(name);
             repair.setDate(date);

@@ -49,7 +49,7 @@ public class AuthenticationServiceImpl implements iAuthenticationService{
             RepairShop repairShop = repairShopRepository.findAll().stream().filter(RepairShop -> RepairShop.getIdRepairShop().equals(idRepairShop)).findFirst().get();
             Client client = new Client(phoneNumber, name, surname, repairShop, auth);
             clientRepository.save(client);
-            return "Client registration successfull";
+            return "Client registration successful";
         }
         else{
             return "Email is already taken";
@@ -65,7 +65,7 @@ public class AuthenticationServiceImpl implements iAuthenticationService{
             authRepository.save(auth);
             RepairShop repairShop = new RepairShop(phoneNumber, name, nip, auth);
             repairShopRepository.save(repairShop);
-            return "Repair Shop registration successfull";
+            return "Repair Shop registration successful";
         }
         else{
             return "Email is already taken";
@@ -103,7 +103,7 @@ public class AuthenticationServiceImpl implements iAuthenticationService{
                 client.getAuth().setPassword(passwordConfig.passwordEncoder().encode(newPassword));
                 System.out.println(passwordConfig.passwordEncoder().encode(newPassword));
                 clientRepository.save(client);
-                return "Password changed succesfully";
+                return "Password changed successfully";
             }
             else{
                 return "Please check your credentials";
