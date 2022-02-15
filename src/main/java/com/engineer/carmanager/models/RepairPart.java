@@ -14,8 +14,6 @@ public class RepairPart {
     private String name;
     private String description;
     private double price;
-    @Lob
-    private byte[] image;
 
     @ManyToOne
     @JsonIgnore
@@ -54,14 +52,6 @@ public class RepairPart {
         this.price = price;
     }
 
-    public byte[] getImage() {
-        return image;
-    }
-
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
-
     public Repair getRepair() {
         return repair;
     }
@@ -77,14 +67,6 @@ public class RepairPart {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.repair = repair;
-    }
-
-    public RepairPart(String name, String description, double price, byte[] image, Repair repair) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.image = image;
         this.repair = repair;
     }
 }

@@ -1,7 +1,5 @@
 package com.engineer.carmanager.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -20,10 +18,10 @@ public class Car {
     private int displacement;
     private int power;
     private int mileage;
-
-
     @ManyToOne
-    @JsonIgnoreProperties(value = {"phoneNumber", "password", "mailAddress","name", "repairShop", "surname"}, allowGetters = false)
+    @JsonIgnoreProperties(value = {"phoneNumber", "password",
+            "mailAddress","name", "repairShop", "surname"},
+            allowGetters = false)
     private Client client;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "car")
     @JsonIgnore
@@ -104,22 +102,6 @@ public class Car {
         this.client = client;
     }
 
-    public Set<FuelTank> getFuelTanks() {
-        return fuelTanks;
-    }
-
-    public void setFuelTanks(Set<FuelTank> fuelTanks) {
-        this.fuelTanks = fuelTanks;
-    }
-
-    public Set<Repair> getRepairs() {
-        return repairs;
-    }
-
-    public void setRepairs(Set<Repair> repairs) {
-        this.repairs = repairs;
-    }
-
     public Car() {
     }
 
@@ -145,18 +127,4 @@ public class Car {
         this.mileage = mileage;
     }
 
-    @Override
-    public String toString() {
-        return "Car{" +
-                "idCar=" + idCar +
-                ", yearOfManufacture=" + yearOfManufacture +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", model='" + model + '\'' +
-                ", version='" + version + '\'' +
-                ", displacement=" + displacement +
-                ", power=" + power +
-                ", mileage=" + mileage +
-                ", client=" + client +
-                '}';
-    }
 }

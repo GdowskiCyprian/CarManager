@@ -20,7 +20,9 @@ public class CarServiceImpl implements iCarService{
     }
 
     @Override
-    public String postCar(Long idClient, int yearOfManufacture, String manufacturer, String model, String version, int displacement, int power, int mileage) {
+    public String postCar(Long idClient, int yearOfManufacture, String manufacturer,
+                          String model, String version, int displacement, int power,
+                          int mileage) {
         String returnMessage = "Car saved";
         try{
             Car car = new Car();
@@ -64,7 +66,9 @@ public class CarServiceImpl implements iCarService{
     }
 
     @Override
-    public String putCar(Long idCar, String manufacturer, String model, String version, int power, int mileage, int displacement, int yearOfManufacture, Long idClient) {
+    public String putCar(Long idCar, String manufacturer, String model, String version,
+                         int power, int mileage, int displacement, int yearOfManufacture,
+                         Long idClient) {
         String returnMessage = "Car updated";
         try {
             Client client = clientRepository.findAll().stream().filter(

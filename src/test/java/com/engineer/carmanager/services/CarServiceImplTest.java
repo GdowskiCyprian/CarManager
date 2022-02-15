@@ -36,8 +36,12 @@ class CarServiceImplTest {
         client.setIdClient(1L);
         clientList.add(client);
         when(clientRepository.findAll()).thenReturn(clientList);
-        assertEquals("Car saved", carServiceImpl.postCar(1L, 1234, "A", "model", "version", 1234, 1234, 1234));
-        assertEquals("Car save unsuccessful", carServiceImpl.postCar(2L, 1234, "A", "model", "version", 1234, 1234, 1234));
+        assertEquals("Car saved", carServiceImpl.postCar(1L,
+                1234, "A", "model", "version",
+                1234, 1234, 1234));
+        assertEquals("Car save unsuccessful", carServiceImpl.postCar(2L,
+                1234, "A", "model", "version",
+                1234, 1234, 1234));
     }
 
     @Test

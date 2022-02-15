@@ -2,6 +2,7 @@ package com.engineer.carmanager.controllers;
 
 import com.engineer.carmanager.models.RepairShop;
 import com.engineer.carmanager.services.iRepairShopService;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;

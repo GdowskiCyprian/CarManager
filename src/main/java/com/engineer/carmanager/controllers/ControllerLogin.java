@@ -32,7 +32,7 @@ public class ControllerLogin {
     }
 
     @PostMapping("/changepassword") //used
-    public String changePasswordClient(@RequestBody Map<String, String> body){
+    public String changePassword(@RequestBody Map<String, String> body){
         System.out.println(body.get("email") + " " + body.get("oldPassword") + " " + body.get("newPassword"));
         return iAuthenticationService.changePassword(body.get("email"), body.get("oldPassword"), body.get("newPassword"));
     }

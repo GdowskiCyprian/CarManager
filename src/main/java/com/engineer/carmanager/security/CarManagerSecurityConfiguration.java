@@ -17,19 +17,8 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class CarManagerSecurityConfiguration extends WebSecurityConfigurerAdapter {
-
-    @Qualifier("RepairShopService")
-    iRepairShopService iRepairShopService;
-    @Qualifier("ClientService")
-    iClientService iClientService;
     @Autowired
     DataSource dataSource;
-
-    private final PasswordEncoder passwordEncoder;
-    @Autowired
-    public CarManagerSecurityConfiguration(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception{

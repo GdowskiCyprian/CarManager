@@ -21,6 +21,7 @@ public class RepairShop{
     @JsonIgnore
     private Set<Client> clients;
     @OneToOne
+    @JsonIgnoreProperties(value="password", allowGetters = false)
     private Auth auth;
 
     public Auth getAuth() {

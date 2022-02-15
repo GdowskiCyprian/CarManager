@@ -21,7 +21,7 @@ public class ControllerRepairPart {
         return iRepairPartService.postRepairPart(
                 repairPartMap.get("partname"),
                 repairPartMap.get("partdescription"),
-                Double.valueOf(repairPartMap.get("price")),
+                Double.valueOf(repairPartMap.get("partprice")),
                 Long.valueOf(repairPartMap.get("idRepair"))
         );
     }

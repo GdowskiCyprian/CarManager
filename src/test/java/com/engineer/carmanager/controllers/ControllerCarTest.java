@@ -55,7 +55,8 @@ class ControllerCarTest {
 
     @Test
     void postCar() throws Exception {
-        when(iCarService.postCar(1L, 1234, "a", "a", "a", 1234, 123, 1234))
+        when(iCarService.postCar(1L, 1234, "a", "a",
+                "a", 1234, 123, 1234))
                 .thenReturn("Car saved");
 
         JSONObject jsonObj = new JSONObject();
