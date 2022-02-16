@@ -7,6 +7,7 @@ import com.engineer.carmanager.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service("CarService")
 public class CarServiceImpl implements iCarService{
@@ -62,7 +63,7 @@ public class CarServiceImpl implements iCarService{
     public List<Car> getCurrentCarsByClient(Long id) {
         return carRepository.findAll().stream().filter(
                 Car -> Car.getClient().getIdClient().equals(id)
-        ).toList();
+        ).collect(Collectors.toList());
     }
 
     @Override

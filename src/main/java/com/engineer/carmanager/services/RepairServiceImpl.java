@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service("RepairService")
 public class RepairServiceImpl implements iRepairService{
 
@@ -50,13 +52,14 @@ public class RepairServiceImpl implements iRepairService{
     }
 
     public List<Repair> getRepairsByRepairShop(Long id){
-        return repairRepository.findAll().stream().filter(Repair -> Repair.getCar().getClient().getRepairShop().getIdRepairShop().equals(id)).toList();
+        return repairRepository.findAll().stream().filter(Repair -> Repair.getCar().getClient()
+                .getRepairShop().getIdRepairShop().equals(id)).collect(Collectors.toList());
     }
 
     @Override
     public List<Repair> getRepairsByClient(Long id) {
         return repairRepository.findAll().stream().filter(
                 Repair -> Repair.getCar().getClient().getIdClient().equals(id)
-        ).toList();
+        ).collect(Collectors.toList());
     }
 }

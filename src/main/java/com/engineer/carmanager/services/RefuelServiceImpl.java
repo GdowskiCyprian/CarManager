@@ -8,6 +8,8 @@ import com.engineer.carmanager.repositories.RefuelRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service("RefuelService")
 public class RefuelServiceImpl implements iRefuelService{
 
@@ -63,6 +65,6 @@ public class RefuelServiceImpl implements iRefuelService{
     public List<Refuel> getCurrentRefuels(Long id) {
         return refuelRepository.findAll().stream().filter(
                 Refuel -> Refuel.getFuelTank().getCar().getClient().getRepairShop().getIdRepairShop().equals(id)
-        ).toList();
+        ).collect(Collectors.toList());
     }
 }
